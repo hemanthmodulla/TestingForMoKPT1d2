@@ -1,0 +1,11 @@
+<div style="margin: 5px" *ngIf="selectedNomination">
+    Trip Number: {{selectedNomination.tripNumber}}
+  <div class="input-group mb-3" *ngIf="selectedNomination">
+    <input type="text" [(ngModel)]="selectedNomination.activity" class="form-control" placeholder="Activity" aria-label="Activity" aria-describedby="basic-addon1">
+  </div>
+  
+  <div class="input-group mb-3" *ngIf="selectedNomination">
+    <input type="text" [(ngModel)]="selectedNomination.parcelStatus"  class="form-control" placeholder="Parcel Status" aria-label="Parcel Status" aria-describedby="basic-addon1">
+  </div>
+  
+  </div>

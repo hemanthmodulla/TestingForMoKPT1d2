@@ -1,0 +1,36 @@
+<div class="gridster-container">
+    <button type="button" class="btn btn-primary top-btn-left"
+    (click)="onClick_LoadUserDashboard1()"><i class="fa fa-podcast" aria-hidden="true"></i> User Dashboard 1</button>
+    <button type="button" class="btn btn-success top-btn-left"
+    (click)="onClick_AddChartWidget()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Chart Widget</button>
+    <button type="button" class="btn btn-success top-btn-left"
+    (click)="onClick_AddNominationListWidget()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Nomination List</button>
+    <button type="button" class="btn btn-success float-right top-btn-right"
+    (click)="onClick_SaveUserDashboardsToLocalStorage()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save User Dashboards to Browser Local Storage</button>
+    
+    <gridster [options]="options">
+        <gridster-item [item]="widget" *ngFor="let widget of dashboard">
+            <div class="drag-handler widget-header">
+                <div class="item-buttons widget-header-buttons">
+                  <div class="float-left header-margin-left"></div><h3 *ngIf="widget.name">{{widget.name}}</h3></div>
+                  <div class="float-right header-margin-right">
+                    <h4>
+                    <a class="widget-header-btn" (mousedown)="onClick_configureItem($event, widget)"
+                          (touchstart)="onClick_configureItem($event, widget)">
+                          <i class="fa fa-cog" aria-hidden="true"></i> ss</a>
+    
+                          <a class="widget-header-btn" (mousedown)="onClick_removeItem($event, widget)"
+                          (touchstart)="onClick_removeItem($event, widget)">
+                          <i class="fa fa-window-close" aria-hidden="true"></i> xx</a>
+                        </h4>
+                  </div>
+              </div>
+              <div class="gridster-item-content" style="height: 100%; margin: 5px">
+                <ndc-dynamic [ndcDynamicComponent]="widget.componentType"
+                 (ndcDynamicInputs)="inputs"
+                 (ndcDynamicOutputs)="outputs"></ndc-dynamic>
+              </div>
+        </gridster-item>
+      </gridster>
+</div>
+    
