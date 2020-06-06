@@ -22,6 +22,7 @@ import { InputFormComponent } from './widgests/input-form/input-form.component';
 import { DashboardService } from './services/dashboard.service';
 import { WidgetCommunicationService } from './services/widget-communication.service';
 import { Example1Component } from './widgets/example1/example1.component';
+import { TextboxComponent } from './widgests/textbox/textbox.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { Example1Component } from './widgets/example1/example1.component';
     KendoComponent,
     InputFormComponent,
     Example1Component,
+    TextboxComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { Example1Component } from './widgets/example1/example1.component';
     BarChartComponent,
     KendoComponent,
     InputFormComponent,
-    Example1Component
+    Example1Component,
+    TextboxComponent
   ],
   bootstrap: [AppComponent],
 })

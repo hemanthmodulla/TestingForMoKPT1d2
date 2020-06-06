@@ -1,6 +1,9 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, ElementRef } from '@angular/core';
 import { WidgetCommunicationService } from 'src/app/services/widget-communication.service';
 import { Subscription } from 'rxjs';
+import { Textbox } from 'src/app/models/textbox.model';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-kendo',
@@ -135,8 +138,11 @@ export class KendoComponent implements OnInit {
         },
         FirstOrderedOn: new Date(1996, 7, 22)
     }];
-
-  constructor(private widgetCommunicationService: WidgetCommunicationService) { }
+    public txtbox : Textbox ;
+  constructor(private widgetCommunicationService: WidgetCommunicationService, private dashboardservice: DashboardService, private dashboardcomp: DashboardComponent, private elRef:ElementRef) { 
+    this.txtbox = new Textbox();
+    this.txtbox.v = '';
+  }
   @Input()
   widget;
   @Input()
@@ -154,11 +160,18 @@ export class KendoComponent implements OnInit {
   ngOnDestroy() {
     this.resizeSub.unsubscribe();
   }
+  onSearchChange(searchValue: string): void {  
+    console.log(searchValue);
+    this.dashboardservice.textboxval = searchValue;
+    console.log(this.dashboardcomp.dashboard);
+    console.log(this.elRef.nativeElement.offsetLeft);
+  }
 
   public onClick_UpdateEditWidget($event): void {
     $event.preventDefault();
     $event.stopPropagation();
     this.messageCount++;
     this.widgetCommunicationService.sendDataToSubscribers('message from nomination list ' + this.messageCount);
+    console.log('here')
   }
 }

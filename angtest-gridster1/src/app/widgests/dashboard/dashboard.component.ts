@@ -5,6 +5,8 @@ import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { KendoComponent } from '../kendo/kendo.component';
 import { User } from 'src/app/models/user.model';
 import { Example1Component } from 'src/app/widgets/example1/example1.component';
+import { TextboxComponent } from '../textbox/textbox.component';
+import { Textbox } from 'src/app/models/textbox.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,7 @@ export class DashboardComponent implements OnInit {
   private resizeEvent: EventEmitter<any> = new EventEmitter<any>();
   private configureEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   public showConfig = false;
-
+  public idVal = 1;
   public inputs = {
     widget: '',
     resizeEvent: this.resizeEvent,
@@ -46,6 +48,10 @@ export class DashboardComponent implements OnInit {
     const user = new User();
     user.id = '123';
     this.dashboard = this.dashboardService.getUserDashBoards(user)[0].widgets;
+    console.log(this.dashboard[this.dashboard.length -1].id);
+    this.idVal = parseInt(this.dashboard[this.dashboard.length -1].id);
+    console.log(this.idVal);
+    console.log('yay');
   }
   changedOptions() {
     this.options.api.optionsChanged();
@@ -78,7 +84,7 @@ export class DashboardComponent implements OnInit {
 
   public onClick_AddChartWidget(): void {
     this.dashboard.push({
-     id: '3',
+     id: this.idVal.toString(),
      name: 'Chart',
      componentName: 'bar-chart',
      componentType: BarChartComponent,
@@ -87,11 +93,13 @@ export class DashboardComponent implements OnInit {
      y: 0,
      x: 0,
    });
+   this.idVal = this.idVal + 1;
+   this.dashboardService.IDModelDictionary.set(this.idVal.toString(),'');
   }
 
   public onClick_AddNominationListWidget(): void {
    this.dashboard.push({
-     id: '1',
+     id: this.idVal.toString(),
      name: 'Nomination List',
      componentName: 'kendo-widget',
      componentType: KendoComponent,
@@ -99,14 +107,37 @@ export class DashboardComponent implements OnInit {
      rows: 1,
      y: 0,
      x: 0,
+     model: this.dashboardService.textboxval,
+     
    });
+   this.idVal = this.idVal + 1;
+   this.dashboardService.IDModelDictionary.set(this.idVal.toString(),this.dashboardService.textboxval);
  }
+
+ public onClick_AddTextBox(): void {
+  this.dashboard.push({
+    id: this.idVal.toString(),
+    name: 'Text Box',
+    componentName: 'textbox',
+    componentType: TextboxComponent,
+    cols: 2,
+    rows: 1,
+    y: 0,
+    x: 0,
+    model:  {v: 'hhh'} as Textbox,
+  });
+  this.idVal = this.idVal + 1;
+  this.dashboardService.IDModelDictionary.set(this.idVal.toString(),'hhh');
+ 
+}
 
 
  public onClick_SaveUserDashboardsToLocalStorage(): void {
    const user = new User();
    user.id = '123';
    this.dashboardService.saveUserDashBoards(user);
+   console.log('tantan here');
+   console.log(this.dashboardService.IDModelDictionary);
  }
 
 }

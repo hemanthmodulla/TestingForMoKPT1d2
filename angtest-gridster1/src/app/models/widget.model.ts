@@ -10,4 +10,6 @@ export class Widget {
   rows: number;
   y: number;
   x: number;
+  // tslint:disable-next-line: ban-types
+  model: Object;
 }

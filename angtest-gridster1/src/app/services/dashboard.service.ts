@@ -7,6 +7,8 @@ import { BarChartComponent } from '../widgests/bar-chart/bar-chart.component';
 import { InputFormComponent } from '../widgests/input-form/input-form.component';
 import { Widget } from '../models/widget.model';
 import { GridType, CompactType } from 'angular-gridster2';
+import { Textbox } from '../models/textbox.model';
+import { TextboxComponent } from '../widgests/textbox/textbox.component';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -16,9 +18,12 @@ interface IDashboardService {
 @Injectable({
   providedIn: 'root'
 })
+
 export class DashboardService {
   private userDashboards: Map<string, Array<Dashboard>> = new Map<string, Array<Dashboard>>();
+  IDModelDictionary = new Map<string, string>();
   private defaultUser: User;
+  textboxval = '';
   constructor() {
     this.loadDashBoards();
    }
@@ -59,6 +64,7 @@ export class DashboardService {
           rows: 1,
           y: 0,
           x: 0,
+          model: this.textboxval,
         },
         {
           id: '2',
@@ -69,6 +75,7 @@ export class DashboardService {
           rows: 1,
           y: 0,
           x: 2,
+          model: new Textbox(),
         },
         {
           id: '3',
@@ -79,10 +86,22 @@ export class DashboardService {
           rows: 2,
           y: 0,
           x: 0,
+          model: new Textbox(),
+        },
+        {
+          id: '4',
+          name: 'textbox',
+          componentName: 'textbox',
+          componentType: TextboxComponent,
+          cols: 2,
+          rows: 1,
+          y: 0,
+          x: 0,
+          model:  {v: 'hhh'} as Textbox,
         }
       ]
       });
-      
+
       this.userDashboards.set(this.defaultUser.id, dashBoards);
     }
   }
@@ -93,6 +112,8 @@ export class DashboardService {
 
   public saveUserDashBoards(user: User): void {
     localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
+    console.log(this.userDashboards.get(user.id));
+    console.log('this is value from textbox : '+ this.textboxval)
   }
 
   public getDashBoardOptions(): DashboardOptions {

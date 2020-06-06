@@ -11,7 +11,7 @@
     </kendo-grid-column>
     <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <input type="checkbox" [checked]="dataItem.Discontinued" disabled />
+        <input type="checkbox" [checked]="dataItem.Discontinued"  />
       </ng-template>
     </kendo-grid-column>
   </kendo-grid>
@@ -19,3 +19,5 @@
   <a class="btn btn-danger" (mousedown)="onClick_UpdateEditWidget($event)" (touchstart)="onClick_UpdateEditWidget($event)">
     update edit nomination widget
   </a>
+  <input class="form-control" (input)="onSearchChange($event.target.value)" type="text" >
+    hi {{this.dashboardservice.textboxval}}
