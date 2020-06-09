@@ -1,4 +1,6 @@
-<kendo-grid [data]="gridData" [height]="410">
+
+<div onreadystatechange="getPosition($event)">
+  <kendo-grid [data]="gridData" [height]="410">
     <kendo-grid-column field="ProductID" title="ID" width="40">
     </kendo-grid-column>
     <kendo-grid-column field="ProductName" title="Name" width="250">
@@ -16,8 +18,8 @@
     </kendo-grid-column>
   </kendo-grid>
   
-  <a class="btn btn-danger" (mousedown)="onClick_UpdateEditWidget($event)" (touchstart)="onClick_UpdateEditWidget($event)">
-    update edit nomination widget
-  </a>
-  <input class="form-control" (input)="onSearchChange($event.target.value)" type="text" >
-    hi {{this.dashboardservice.textboxval}}
+
+  <input #text class="form-control" (input)="onSearchChange($event.target.value, text.id,$event)" type="text" id="{{this.idvalue}}" value="{{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}">
+    hi {{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}
+</div>
+

@@ -9,6 +9,7 @@ import { Widget } from '../models/widget.model';
 import { GridType, CompactType } from 'angular-gridster2';
 import { Textbox } from '../models/textbox.model';
 import { TextboxComponent } from '../widgests/textbox/textbox.component';
+import { TSMap } from 'typescript-map';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -22,28 +23,52 @@ interface IDashboardService {
 export class DashboardService {
   private userDashboards: Map<string, Array<Dashboard>> = new Map<string, Array<Dashboard>>();
   IDModelDictionary = new Map<string, string>();
+  public idVal = 0;
   private defaultUser: User;
+  public currentdashboard = Array<Dashboard>();
   textboxval = '';
   constructor() {
     this.loadDashBoards();
    }
 
    private loadDashBoards(): void {
-    this.defaultUser = new User();
-    this.defaultUser.id = '123';
-    if (localStorage.getItem(this.defaultUser.id) ) {
+     console.log('yooo');
+     this.defaultUser = new User();
+     this.defaultUser.id = '123';
+     if (localStorage.getItem(this.defaultUser.id) ) {
+      if (localStorage.getItem('dictionary1') ) {
+        const jsonObject2 = JSON.parse(localStorage.getItem('dictionary1'));
+        const map = new Map<string, string>();
+        // tslint:disable-next-line: forin
+        for (const value in jsonObject2) {
+            map.set(value, jsonObject2[value]);
+            console.log(value);
+            console.log(jsonObject2[value]);
+            }
+        this.IDModelDictionary = map;
+        console.log( this.IDModelDictionary);
+        console.log('map:' + map);
+      }
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
       const dashboards = JSON.parse(savdDashboards) as Array<Dashboard>;
+      this.currentdashboard = dashboards;
       dashboards.forEach((dashboard: Dashboard) => {
         dashboard.widgets.forEach((widget: Widget) => {
           if (widget.componentName === 'kendo-widget') {
             widget.componentType = KendoComponent;
+            this.idVal = Number(widget.id);
           }
           if (widget.componentName === 'input-form') {
             widget.componentType = InputFormComponent;
+            this.idVal = Number(widget.id);
           }
           if (widget.componentName === 'bar-chart') {
             widget.componentType = BarChartComponent;
+            this.idVal = Number(widget.id);
+          }
+          if (widget.componentName === 'textbox') {
+            widget.componentType = TextboxComponent;
+            this.idVal = Number(widget.id);
           }
           // if (widget.componentName === "operator-widget") {
           //   widget.componentType = OperatorWidgetComponent;
@@ -113,7 +138,7 @@ export class DashboardService {
   public saveUserDashBoards(user: User): void {
     localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
     console.log(this.userDashboards.get(user.id));
-    console.log('this is value from textbox : '+ this.textboxval)
+    console.log('this is value from textbox : ' + this.textboxval);
   }
 
   public getDashBoardOptions(): DashboardOptions {

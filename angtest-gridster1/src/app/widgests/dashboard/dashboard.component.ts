@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
   private resizeEvent: EventEmitter<any> = new EventEmitter<any>();
   private configureEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   public showConfig = false;
-  public idVal = 1;
   public inputs = {
     widget: '',
     resizeEvent: this.resizeEvent,
@@ -48,9 +47,10 @@ export class DashboardComponent implements OnInit {
     const user = new User();
     user.id = '123';
     this.dashboard = this.dashboardService.getUserDashBoards(user)[0].widgets;
-    console.log(this.dashboard[this.dashboard.length -1].id);
-    this.idVal = parseInt(this.dashboard[this.dashboard.length -1].id);
-    console.log(this.idVal);
+    console.log(this.dashboard[this.dashboard.length - 1].id);
+    // tslint:disable-next-line: radix
+    this.dashboardService.idVal = parseInt(this.dashboard[this.dashboard.length - 1].id);
+    console.log(this.dashboardService.idVal);
     console.log('yay');
   }
   changedOptions() {
@@ -83,8 +83,10 @@ export class DashboardComponent implements OnInit {
  }
 
   public onClick_AddChartWidget(): void {
+    this.dashboardService.idVal = this.dashboardService.idVal + 1;
+    this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), '');
     this.dashboard.push({
-     id: this.idVal.toString(),
+     id: this.dashboardService.idVal.toString(),
      name: 'Chart',
      componentName: 'bar-chart',
      componentType: BarChartComponent,
@@ -93,13 +95,15 @@ export class DashboardComponent implements OnInit {
      y: 0,
      x: 0,
    });
-   this.idVal = this.idVal + 1;
-   this.dashboardService.IDModelDictionary.set(this.idVal.toString(),'');
+
   }
 
   public onClick_AddNominationListWidget(): void {
-   this.dashboard.push({
-     id: this.idVal.toString(),
+    this.dashboardService.idVal = this.dashboardService.idVal + 1;
+    this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), this.dashboardService.textboxval);
+    console.log(this.dashboardService.IDModelDictionary);
+    this.dashboard.push({
+     id: this.dashboardService.idVal.toString(),
      name: 'Nomination List',
      componentName: 'kendo-widget',
      componentType: KendoComponent,
@@ -108,15 +112,16 @@ export class DashboardComponent implements OnInit {
      y: 0,
      x: 0,
      model: this.dashboardService.textboxval,
-     
+
    });
-   this.idVal = this.idVal + 1;
-   this.dashboardService.IDModelDictionary.set(this.idVal.toString(),this.dashboardService.textboxval);
+
  }
 
  public onClick_AddTextBox(): void {
+  this.dashboardService.idVal = this.dashboardService.idVal + 1;
+  this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), this.dashboardService.textboxval);
   this.dashboard.push({
-    id: this.idVal.toString(),
+    id: this.dashboardService.idVal.toString(),
     name: 'Text Box',
     componentName: 'textbox',
     componentType: TextboxComponent,
@@ -126,18 +131,28 @@ export class DashboardComponent implements OnInit {
     x: 0,
     model:  {v: 'hhh'} as Textbox,
   });
-  this.idVal = this.idVal + 1;
-  this.dashboardService.IDModelDictionary.set(this.idVal.toString(),'hhh');
- 
+
 }
 
 
  public onClick_SaveUserDashboardsToLocalStorage(): void {
-   const user = new User();
-   user.id = '123';
-   this.dashboardService.saveUserDashBoards(user);
-   console.log('tantan here');
-   console.log(this.dashboardService.IDModelDictionary);
+  console.log(localStorage.getItem('dictionary1'));
+  const user = new User();
+  if (localStorage.getItem('dictionary1') ) {
+    console.log('yobigibo');
+    localStorage.removeItem( 'dictionary1');
+
+   }
+  user.id = '123';
+  this.dashboardService.saveUserDashBoards(user);
+  console.log('tantan here');
+  const jsonObject = {};
+  this.dashboardService.IDModelDictionary.forEach((value, key) => {
+      jsonObject[key] = value;
+  });
+
+  localStorage.setItem('dictionary1', JSON.stringify(jsonObject));
+  console.log( JSON.parse(localStorage.getItem('dictionary1')));
  }
 
 }

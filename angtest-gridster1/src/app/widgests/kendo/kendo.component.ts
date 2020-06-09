@@ -138,10 +138,20 @@ export class KendoComponent implements OnInit {
         },
         FirstOrderedOn: new Date(1996, 7, 22)
     }];
-    public txtbox : Textbox ;
-  constructor(private widgetCommunicationService: WidgetCommunicationService, private dashboardservice: DashboardService, private dashboardcomp: DashboardComponent, private elRef:ElementRef) { 
+    public txtbox: Textbox ;
+    public textvalue: string ;
+    public idvalue: Number;
+    public wid: any;
+  // tslint:disable-next-line: max-line-length
+  constructor(private widgetCommunicationService: WidgetCommunicationService, public dashboardService: DashboardService, private dashboardcomp: DashboardComponent, private elRef: ElementRef) {
     this.txtbox = new Textbox();
     this.txtbox.v = '';
+    console.log('ooooooo');
+    this.textvalue = '';
+    if (this.dashboardService.IDModelDictionary != null) {
+         this.textvalue = this.dashboardService.IDModelDictionary.get(this.dashboardService.idVal.toString());
+         console.log(this.textvalue);
+    }
   }
   @Input()
   widget;
@@ -150,9 +160,21 @@ export class KendoComponent implements OnInit {
   resizeSub: Subscription;
   private messageCount = 0;
   ngOnInit() {
+
+    console.log(this.dashboardService.currentdashboard[0].widgets);
+    // tslint:disable-next-line: max-line-length
+    //this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.currentdashboard[0].widgets.length - 1].id);
+    this.idvalue =  Number(this.dashboardService.idVal);
+    console.log('yotyo');
+    this.wid = this.widget;
+    console.log(this.wid);
+    console.log('gggggg');
+    console.log(this.idvalue);
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
         console.log(widget);
+        console.log('iiiii');
+
       }
     });
   }
@@ -160,11 +182,15 @@ export class KendoComponent implements OnInit {
   ngOnDestroy() {
     this.resizeSub.unsubscribe();
   }
-  onSearchChange(searchValue: string): void {  
+  onSearchChange(searchValue: string, id: string, $event): void {
     console.log(searchValue);
-    this.dashboardservice.textboxval = searchValue;
+    this.dashboardService.textboxval = searchValue;
     console.log(this.dashboardcomp.dashboard);
-    console.log(this.elRef.nativeElement.offsetLeft);
+    console.log(id);
+    this.dashboardService.IDModelDictionary.set(id, searchValue);
+    console.log( this.dashboardService.IDModelDictionary);
+    console.log('heloooooo');
+    console.log($event.nativeEvent);
   }
 
   public onClick_UpdateEditWidget($event): void {
@@ -172,6 +198,11 @@ export class KendoComponent implements OnInit {
     $event.stopPropagation();
     this.messageCount++;
     this.widgetCommunicationService.sendDataToSubscribers('message from nomination list ' + this.messageCount);
-    console.log('here')
+    console.log('here');
   }
+  public getPosition($event){
+    console.log('heloooooo');
+    console.log($event.nativeEvent.layout);
+  }
+
 }

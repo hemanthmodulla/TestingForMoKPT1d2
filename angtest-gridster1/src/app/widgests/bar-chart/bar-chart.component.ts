@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnInit {
+export class BarChartComponent implements OnChanges  {
 
   @Input()
   widget;
@@ -16,7 +16,8 @@ export class BarChartComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    console.log( this.resizeSub);
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
         console.log(widget);
