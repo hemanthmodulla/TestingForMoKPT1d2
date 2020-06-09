@@ -163,8 +163,10 @@ export class KendoComponent implements OnInit {
 
     console.log(this.dashboardService.currentdashboard[0].widgets);
     // tslint:disable-next-line: max-line-length
-    //this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.currentdashboard[0].widgets.length - 1].id);
-    this.idvalue =  Number(this.dashboardService.idVal);
+    this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.currentdashboard[0].widgets.length - 1].id);
+    
+
+   // this.idvalue =  Number(this.dashboardService.idVal);
     console.log('yotyo');
     this.wid = this.widget;
     console.log(this.wid);
