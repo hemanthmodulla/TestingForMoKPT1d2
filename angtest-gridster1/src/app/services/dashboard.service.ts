@@ -22,11 +22,12 @@ interface IDashboardService {
 
 export class DashboardService {
   private userDashboards: Map<string, Array<Dashboard>> = new Map<string, Array<Dashboard>>();
-  IDModelDictionary = new Map<string, string>();
+  IDModelDictionary = new Map<string, any>();
   public idVal = 0;
   private defaultUser: User;
   public currentdashboard = Array<Dashboard>();
   textboxval = '';
+  kendocount = 0;
   constructor() {
     this.loadDashBoards();
    }

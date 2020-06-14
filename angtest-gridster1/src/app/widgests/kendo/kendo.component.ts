@@ -162,8 +162,17 @@ export class KendoComponent implements OnInit {
   ngOnInit() {
 
     console.log(this.dashboardService.currentdashboard[0].widgets);
+    if (this.dashboardService.currentdashboard[0].widgets.length > 0 && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
+      console.log('after kendo count');
+      console.log(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount]);
+      this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount].id);
+      this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
+    }
+    else{
+
     // tslint:disable-next-line: max-line-length
     this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.currentdashboard[0].widgets.length - 1].id);
+    }
     
 
    // this.idvalue =  Number(this.dashboardService.idVal);

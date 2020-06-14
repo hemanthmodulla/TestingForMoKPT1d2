@@ -60,6 +60,7 @@ export class DashboardComponent implements OnInit {
   public onClick_removeItem($event, item): void {
    $event.preventDefault();
    $event.stopPropagation();
+   this.dashboardService.IDModelDictionary.delete(item.id);
    this.dashboard.splice(this.dashboard.indexOf(item), 1);
   }
 
