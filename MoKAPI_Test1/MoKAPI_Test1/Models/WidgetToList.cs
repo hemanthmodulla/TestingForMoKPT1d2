@@ -7,7 +7,7 @@ namespace MoKAPI_Test1.Models
 {
     public class WidgetToList
     {
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public string WidgetID { get; set; }
         public string name { get; set; }
         public string componentName { get; set; }

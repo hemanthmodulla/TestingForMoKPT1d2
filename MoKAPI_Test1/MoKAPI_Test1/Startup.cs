@@ -54,6 +54,7 @@ namespace MoKAPI_Test1
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

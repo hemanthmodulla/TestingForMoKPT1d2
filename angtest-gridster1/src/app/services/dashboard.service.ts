@@ -143,7 +143,7 @@ export class DashboardService {
     const data = this.dahboardsFromsave.map(x => x.widgets)[0];
 
     let dummy = data.map(item => new WidgetToList(item, user.id ));
-    this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' });
+    this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' }).subscribe();
 
     console.log(dummy);
     // console.log(this.userDashboards.get(user.id));
