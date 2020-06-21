@@ -1,7 +1,8 @@
 import { Widget } from './widget.model';
 
 export class WidgetToList {
-    id: string;
+    UserID: string;
+    WidgetID: string;
     name: string;
     componentName: string;
     cols: number;
@@ -10,8 +11,9 @@ export class WidgetToList {
     x: number;
     // tslint:disable-next-line: ban-types
     model: string;
-    constructor(item: Widget) {
-        this.id = item.id;
+    constructor(item: Widget, userid: string ) {
+        this.UserID = userid;
+        this.WidgetID = item.id;
         this.name = item.name;
         this.componentName = item.componentName,
         this.cols = item.cols,

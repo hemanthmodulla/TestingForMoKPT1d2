@@ -11,6 +11,7 @@ import { Textbox } from '../models/textbox.model';
 import { TextboxComponent } from '../widgests/textbox/textbox.component';
 import { TSMap } from 'typescript-map';
 import { WidgetToList } from '../models/widget-to-list.model';
+import { HttpClient } from '@angular/common/http';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -31,7 +32,7 @@ export class DashboardService {
 
   textboxval = '';
   kendocount = 0;
-  constructor() {
+  constructor(private http: HttpClient) {
     this.loadDashBoards();
    }
 
@@ -141,7 +142,9 @@ export class DashboardService {
     this.dahboardsFromsave = this.userDashboards.get(user.id);
     const data = this.dahboardsFromsave.map(x => x.widgets)[0];
 
-    let dummy = data.map(item => new WidgetToList(item));
+    let dummy = data.map(item => new WidgetToList(item, user.id ));
+    this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' });
+
     console.log(dummy);
     // console.log(this.userDashboards.get(user.id));
     // console.log('this is value from textbox : ' + this.textboxval);

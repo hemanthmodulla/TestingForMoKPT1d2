@@ -48,8 +48,9 @@ namespace MoKAPI_Test1.Controllers
 
         // POST: api/Widget
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] List<WidgetToList> value)
         {
+            //public ActionResult Post([FromBody] RegisterClass userInformation)
         }
 
         // PUT: api/Widget/5
