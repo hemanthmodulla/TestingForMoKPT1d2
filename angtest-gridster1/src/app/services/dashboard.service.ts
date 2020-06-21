@@ -139,10 +139,9 @@ export class DashboardService {
     localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
     console.log('From save');
     this.dahboardsFromsave = this.userDashboards.get(user.id);
-    const data = this.dahboardsFromsave .map(x => x.widgets)[0];
-    // tslint:disable-next-line: no-unused-expression
-    let dummy: WidgetToList[] ;
-    //dummy = data.map(a => new WidgetToList{});
+    const data = this.dahboardsFromsave.map(x => x.widgets)[0];
+
+    let dummy = data.map(item => new WidgetToList(item));
     console.log(dummy);
     // console.log(this.userDashboards.get(user.id));
     // console.log('this is value from textbox : ' + this.textboxval);
