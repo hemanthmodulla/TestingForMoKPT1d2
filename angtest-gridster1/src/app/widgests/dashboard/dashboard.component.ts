@@ -7,6 +7,8 @@ import { User } from 'src/app/models/user.model';
 import { Example1Component } from 'src/app/widgets/example1/example1.component';
 import { TextboxComponent } from '../textbox/textbox.component';
 import { Textbox } from 'src/app/models/textbox.model';
+import {HttpClient} from '@angular/common/http';
+import { Widget } from 'src/app/models/widget.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,22 +17,33 @@ import { Textbox } from 'src/app/models/textbox.model';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private http: HttpClient) { }
   public options: GridsterConfig;
   public dashboard: Array<GridsterItem>;
   private resizeEvent: EventEmitter<any> = new EventEmitter<any>();
   private configureEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   public showConfig = false;
+  readonly rootUrl = 'http://localhost:5000/api/';
+  widgetVal: any = [];
   public inputs = {
     widget: '',
     resizeEvent: this.resizeEvent,
     configureEvent: this.configureEvent
+
   };
   public outputs = {
     onSomething: (type) => alert(type)
   };
 
   ngOnInit() {
+
+    console.log('zpppp');
+    this.http.get<Widget>(this.rootUrl + 'widget').subscribe(data => {
+    this.widgetVal = data;
+     console.log(this.widgetVal);
+    });
+    console.log('vgsgsg');
+
     this.options = this.dashboardService.getDashBoardOptions();
     this.options.displayGrid = DisplayGrid.OnDragAndResize;
     this.options.itemChangeCallback = (item) => {

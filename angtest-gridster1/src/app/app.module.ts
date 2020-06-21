@@ -24,6 +24,9 @@ import { WidgetCommunicationService } from './services/widget-communication.serv
 import { Example1Component } from './widgets/example1/example1.component';
 import { TextboxComponent } from './widgests/textbox/textbox.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +50,8 @@ import { TextboxComponent } from './widgests/textbox/textbox.component';
     NotificationModule,
     DatePickerModule,
     PopupModule,
+    
+    HttpClientModule,
     // tslint:disable-next-line: deprecation
     DynamicModule.withComponents([KendoComponent, InputFormComponent, BarChartComponent])
   ],
