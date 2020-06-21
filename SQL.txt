@@ -1,0 +1,22 @@
+
+  insert into [db_MoK_PT1].[dbo].[WidgetTable]
+  values (newid(),1,'1','Nomination List','kendo-widget','KendoComponent',2,1,0,0,null )
+,(newid(),1,'3','Chart','bar-chart','BarChartComponent',2,2,0,0,null )
+
+  begin tran 
+  drop table [db_MoK_PT1].[dbo].[WidgetTable]
+
+  create table [db_MoK_PT1].[dbo].[WidgetTable]  (
+    [WidgetTableID] Uniqueidentifier primary key not null,
+      [UserID] int not null
+      ,[WidgetID] nvarchar(250) not null
+      ,[name] nvarchar(250) not null
+      ,[componentName] nvarchar(250) not null
+      ,[componentType] nvarchar(250) not null
+      ,[cols] int not null
+      ,[rows] int  not null
+      ,[y] int not null
+      ,[x] int not null
+      ,[model] nvarchar(MAX) null
+);
+  rollback tran 
