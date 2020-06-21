@@ -21,9 +21,6 @@ namespace MoKAPI_Test1.Models
         public string componentName { get; set; }
 
         [Required]
-        public string componentType { get; set; }
-
-        [Required]
         public int cols { get; set; }
 
         [Required]

@@ -28,7 +28,6 @@ namespace MoKAPI_Test1.Controllers
                             id = wt.WidgetID,
                             name = wt.name,
                             componentName = wt.componentName,
-                            componentType = wt.componentType,
                             cols = wt.cols,
                             rows = wt.rows,
                             wt.y,

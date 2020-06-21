@@ -10,6 +10,7 @@ import { GridType, CompactType } from 'angular-gridster2';
 import { Textbox } from '../models/textbox.model';
 import { TextboxComponent } from '../widgests/textbox/textbox.component';
 import { TSMap } from 'typescript-map';
+import { WidgetToList } from '../models/widget-to-list.model';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -26,6 +27,8 @@ export class DashboardService {
   public idVal = 0;
   private defaultUser: User;
   public currentdashboard = Array<Dashboard>();
+  public dahboardsFromsave = Array<Dashboard>();
+
   textboxval = '';
   kendocount = 0;
   constructor() {
@@ -43,12 +46,8 @@ export class DashboardService {
         // tslint:disable-next-line: forin
         for (const value in jsonObject2) {
             map.set(value, jsonObject2[value]);
-            console.log(value);
-            console.log(jsonObject2[value]);
             }
         this.IDModelDictionary = map;
-        console.log( this.IDModelDictionary);
-        console.log('map:' + map);
       }
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
       const dashboards = JSON.parse(savdDashboards) as Array<Dashboard>;
@@ -138,8 +137,15 @@ export class DashboardService {
 
   public saveUserDashBoards(user: User): void {
     localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
-    console.log(this.userDashboards.get(user.id));
-    console.log('this is value from textbox : ' + this.textboxval);
+    console.log('From save');
+    this.dahboardsFromsave = this.userDashboards.get(user.id);
+    const data = this.dahboardsFromsave .map(x => x.widgets)[0];
+    // tslint:disable-next-line: no-unused-expression
+    let dummy: WidgetToList[] ;
+    //dummy = data.map(a => new WidgetToList{});
+    console.log(dummy);
+    // console.log(this.userDashboards.get(user.id));
+    // console.log('this is value from textbox : ' + this.textboxval);
   }
 
   public getDashBoardOptions(): DashboardOptions {

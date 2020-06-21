@@ -37,12 +37,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log('zpppp');
-    this.http.get<Widget>(this.rootUrl + 'widget').subscribe(data => {
-    this.widgetVal = data;
-     console.log(this.widgetVal);
-    });
-    console.log('vgsgsg');
+    // this.http.get<Widget>(this.rootUrl + 'widget').subscribe(data => {
+    // this.widgetVal = data;
+    //  console.log(this.widgetVal);
+    // });
 
     this.options = this.dashboardService.getDashBoardOptions();
     this.options.displayGrid = DisplayGrid.OnDragAndResize;
@@ -150,23 +148,18 @@ export class DashboardComponent implements OnInit {
 
 
  public onClick_SaveUserDashboardsToLocalStorage(): void {
-  console.log(localStorage.getItem('dictionary1'));
   const user = new User();
   if (localStorage.getItem('dictionary1') ) {
-    console.log('yobigibo');
     localStorage.removeItem( 'dictionary1');
-
    }
   user.id = '123';
   this.dashboardService.saveUserDashBoards(user);
-  console.log('tantan here');
   const jsonObject = {};
   this.dashboardService.IDModelDictionary.forEach((value, key) => {
       jsonObject[key] = value;
   });
 
   localStorage.setItem('dictionary1', JSON.stringify(jsonObject));
-  console.log( JSON.parse(localStorage.getItem('dictionary1')));
  }
 
 }
