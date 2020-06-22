@@ -20,10 +20,10 @@ export class TextboxComponent implements OnInit {
     this.txtbox.v = '';}
   ngOnInit() {
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
-      if (widget === this.widget) {
-]      }
+      if (widget === this.widget) {      }
     });
-    if (this.dashboardService.currentdashboard[0].widgets.length > 0 && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
+    if (this.dashboardService.currentdashboard[0].widgets.length > 0 
+       && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
       this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
     }
   }
@@ -32,7 +32,7 @@ export class TextboxComponent implements OnInit {
     this.resizeSub.unsubscribe();
   }
 
-  onSearchChange(searchValue: string): void {  
+  onSearchChange(searchValue: string): void {
     this.txtbox.v = searchValue;
   }
 

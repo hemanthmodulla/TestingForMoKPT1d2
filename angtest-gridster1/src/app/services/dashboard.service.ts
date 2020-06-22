@@ -54,7 +54,7 @@ export class DashboardService {
       }
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
       this.http.get(this.rootUrl + 'widget').subscribe(data => {
-     savedWidgetToList = data as WidgetToList[];
+     console.log(data);
 
     });
       const dashboards = JSON.parse(savdDashboards) as Array<Dashboard>;
