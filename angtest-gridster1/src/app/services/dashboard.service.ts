@@ -59,6 +59,7 @@ export class DashboardService {
      console.log(savedWidgetToList);
 
     });
+    console.log('saved Widget List 3');
       console.log(savedWidgetToList);
       const dashboards = JSON.parse(savdDashboards) as Array<Dashboard>;
       this.currentdashboard = dashboards;

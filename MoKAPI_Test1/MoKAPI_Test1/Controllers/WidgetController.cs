@@ -25,14 +25,15 @@ namespace MoKAPI_Test1.Controllers
         {
             var query = from wt in _context.WidgetTable
                         select new {
-                            id = wt.WidgetID,
+                            UserID = wt.UserID,
+                            WidgetID = wt.WidgetID,
                             name = wt.name,
                             componentName = wt.componentName,
-                            cols = wt.cols,
                             rows = wt.rows,
-                            wt.y,
-                            wt.x,
-                            wt.model
+                            cols = wt.cols,
+                            x = wt.x,
+                            y = wt.y,
+                            model = wt.model
                         };
 
             
