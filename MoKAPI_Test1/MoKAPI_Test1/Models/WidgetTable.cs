@@ -10,7 +10,7 @@ namespace MoKAPI_Test1.Models
     {
         [Key]
         public Guid WidgetTableID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public string WidgetID { get; set; }
         public string name { get; set; }
 

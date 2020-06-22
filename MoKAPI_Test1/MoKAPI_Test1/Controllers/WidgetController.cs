@@ -50,6 +50,28 @@ namespace MoKAPI_Test1.Controllers
         [HttpPost]
         public void Post([FromBody] List<WidgetToList> value)
         {
+
+            var widgetTableItems = from v in value
+                        select new WidgetTable
+                        {
+                            UserID = v.UserID,
+                            WidgetID = v.WidgetID,
+                            name = v.name,
+                            componentName = v.componentName,
+                            rows = v.rows,
+                            cols = v.cols,
+                            x = v.x,
+                            y = v.y,
+                            model = v.model
+
+                        };
+            string uID = widgetTableItems.First().UserID;
+            _context.WidgetTable.RemoveRange(_context.WidgetTable.Where(x => x.UserID == uID));
+            _context.SaveChanges();
+
+            _context.WidgetTable.AddRange(widgetTableItems);
+            _context.SaveChanges();
+            
             //public ActionResult Post([FromBody] RegisterClass userInformation)
         }
 

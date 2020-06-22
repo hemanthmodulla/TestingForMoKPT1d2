@@ -36,7 +36,6 @@ export class TextboxComponent implements OnInit {
   onSearchChange(searchValue: string): void {  
     console.log(searchValue);
     this.txtbox.v = searchValue;
-    console.log('this is ' + this.txtbox.v);
   }
 
 

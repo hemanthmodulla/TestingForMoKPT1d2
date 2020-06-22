@@ -26,6 +26,7 @@ export class DashboardService {
   private userDashboards: Map<string, Array<Dashboard>> = new Map<string, Array<Dashboard>>();
   IDModelDictionary = new Map<string, any>();
   public idVal = 0;
+  readonly rootUrl = 'http://localhost:5000/api/';
   private defaultUser: User;
   public currentdashboard = Array<Dashboard>();
   public dahboardsFromsave = Array<Dashboard>();
@@ -37,9 +38,10 @@ export class DashboardService {
    }
 
    private loadDashBoards(): void {
-     console.log('yooo');
      this.defaultUser = new User();
      this.defaultUser.id = '123';
+     let savedWidgetToList: WidgetToList[];
+
      if (localStorage.getItem(this.defaultUser.id) ) {
       if (localStorage.getItem('dictionary1') ) {
         const jsonObject2 = JSON.parse(localStorage.getItem('dictionary1'));
@@ -51,6 +53,13 @@ export class DashboardService {
         this.IDModelDictionary = map;
       }
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
+      this.http.get<WidgetToList[]>(this.rootUrl + 'widget').subscribe(data => {
+     savedWidgetToList = data;
+     console.log('saved Widget List');
+     console.log(savedWidgetToList);
+
+    });
+      console.log(savedWidgetToList);
       const dashboards = JSON.parse(savdDashboards) as Array<Dashboard>;
       this.currentdashboard = dashboards;
       dashboards.forEach((dashboard: Dashboard) => {
@@ -142,7 +151,7 @@ export class DashboardService {
     this.dahboardsFromsave = this.userDashboards.get(user.id);
     const data = this.dahboardsFromsave.map(x => x.widgets)[0];
 
-    let dummy = data.map(item => new WidgetToList(item, user.id ));
+    const dummy = data.map(item => new WidgetToList(item, user.id ));
     this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' }).subscribe();
 
     console.log(dummy);

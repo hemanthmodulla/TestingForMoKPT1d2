@@ -23,8 +23,6 @@ export class BarChartComponent implements OnInit  {
   constructor(public dashboardService: DashboardService) {
     if (this.dashboardService.IDModelDictionary != null) {
       this.imageVal = new Blob([this.dashboardService.IDModelDictionary.get(this.dashboardService.idVal.toString())]);
-      console.log(this.imageVal);
-      console.log('after constructor');
  }
 
    }
@@ -40,25 +38,19 @@ export class BarChartComponent implements OnInit  {
       console.log('after kendo count');
       console.log(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount]);
       this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount].id);
-      console.log( this.idvalue);
       let reader = new FileReader();
       this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
      
       reader.readAsDataURL(this.imageVal);
-      console.log('uuuuuuuuuuuu');
       this.imgURL = reader.result;
-      console.log(reader);
-      console.log('tttttttttttttt');
 
     } else {
 
     // tslint:disable-next-line: max-line-length
     this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.currentdashboard[0].widgets.length - 1].id);
     }
-    console.log( this.resizeSub);
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
-        console.log(widget);
       }
     });
   }
@@ -80,7 +72,6 @@ export class BarChartComponent implements OnInit  {
 
     let reader = new FileReader();
     this.imagePath = files;
-    console.log(files[0]);
     this.dashboardService.IDModelDictionary.set(id, files[0]);
     console.log(this.dashboardService.IDModelDictionary);
     reader.readAsDataURL(files[0]);

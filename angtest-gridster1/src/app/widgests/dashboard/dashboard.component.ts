@@ -37,10 +37,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.http.get<Widget>(this.rootUrl + 'widget').subscribe(data => {
-    // this.widgetVal = data;
-    //  console.log(this.widgetVal);
-    // });
+    
 
     this.options = this.dashboardService.getDashBoardOptions();
     this.options.displayGrid = DisplayGrid.OnDragAndResize;
@@ -62,7 +59,6 @@ export class DashboardComponent implements OnInit {
     // tslint:disable-next-line: radix
     this.dashboardService.idVal = parseInt(this.dashboard[this.dashboard.length - 1].id);
     console.log(this.dashboardService.idVal);
-    console.log('yay');
   }
   changedOptions() {
     this.options.api.optionsChanged();

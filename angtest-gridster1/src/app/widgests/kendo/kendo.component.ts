@@ -146,11 +146,9 @@ export class KendoComponent implements OnInit {
   constructor(private widgetCommunicationService: WidgetCommunicationService, public dashboardService: DashboardService, private dashboardcomp: DashboardComponent, private elRef: ElementRef) {
     this.txtbox = new Textbox();
     this.txtbox.v = '';
-    console.log('ooooooo');
     this.textvalue = '';
     if (this.dashboardService.IDModelDictionary != null) {
          this.textvalue = this.dashboardService.IDModelDictionary.get(this.dashboardService.idVal.toString());
-         console.log(this.textvalue);
     }
   }
   @Input()
@@ -176,15 +174,11 @@ export class KendoComponent implements OnInit {
     
 
    // this.idvalue =  Number(this.dashboardService.idVal);
-    console.log('yotyo');
     this.wid = this.widget;
-    console.log(this.wid);
-    console.log('gggggg');
     console.log(this.idvalue);
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
         console.log(widget);
-        console.log('iiiii');
 
       }
     });
@@ -197,11 +191,8 @@ export class KendoComponent implements OnInit {
     console.log(searchValue);
     this.dashboardService.textboxval = searchValue;
     console.log(this.dashboardcomp.dashboard);
-    console.log(id);
     this.dashboardService.IDModelDictionary.set(id, searchValue);
     console.log( this.dashboardService.IDModelDictionary);
-    console.log('heloooooo');
-    console.log($event.nativeEvent);
   }
 
   public onClick_UpdateEditWidget($event): void {
@@ -209,10 +200,8 @@ export class KendoComponent implements OnInit {
     $event.stopPropagation();
     this.messageCount++;
     this.widgetCommunicationService.sendDataToSubscribers('message from nomination list ' + this.messageCount);
-    console.log('here');
   }
   public getPosition($event){
-    console.log('heloooooo');
     console.log($event.nativeEvent.layout);
   }
 
