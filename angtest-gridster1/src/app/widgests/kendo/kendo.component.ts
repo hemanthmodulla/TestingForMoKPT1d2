@@ -159,10 +159,7 @@ export class KendoComponent implements OnInit {
   private messageCount = 0;
   ngOnInit() {
 
-    console.log(this.dashboardService.currentdashboard[0].widgets);
     if (this.dashboardService.currentdashboard[0].widgets.length > 0 && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
-      console.log('after kendo count');
-      console.log(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount]);
       this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount].id);
       this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
     }
@@ -175,10 +172,8 @@ export class KendoComponent implements OnInit {
 
    // this.idvalue =  Number(this.dashboardService.idVal);
     this.wid = this.widget;
-    console.log(this.idvalue);
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
-        console.log(widget);
 
       }
     });
@@ -188,11 +183,8 @@ export class KendoComponent implements OnInit {
     this.resizeSub.unsubscribe();
   }
   onSearchChange(searchValue: string, id: string, $event): void {
-    console.log(searchValue);
     this.dashboardService.textboxval = searchValue;
-    console.log(this.dashboardcomp.dashboard);
     this.dashboardService.IDModelDictionary.set(id, searchValue);
-    console.log( this.dashboardService.IDModelDictionary);
   }
 
   public onClick_UpdateEditWidget($event): void {
@@ -202,7 +194,6 @@ export class KendoComponent implements OnInit {
     this.widgetCommunicationService.sendDataToSubscribers('message from nomination list ' + this.messageCount);
   }
   public getPosition($event){
-    console.log($event.nativeEvent.layout);
   }
 
 }

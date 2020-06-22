@@ -21,8 +21,7 @@ export class TextboxComponent implements OnInit {
   ngOnInit() {
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
-        console.log(widget);
-      }
+]      }
     });
     if (this.dashboardService.currentdashboard[0].widgets.length > 0 && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
       this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
@@ -34,7 +33,6 @@ export class TextboxComponent implements OnInit {
   }
 
   onSearchChange(searchValue: string): void {  
-    console.log(searchValue);
     this.txtbox.v = searchValue;
   }
 

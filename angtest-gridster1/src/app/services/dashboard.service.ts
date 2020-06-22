@@ -53,14 +53,10 @@ export class DashboardService {
         this.IDModelDictionary = map;
       }
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
-      this.http.get<WidgetToList[]>(this.rootUrl + 'widget').subscribe(data => {
-     savedWidgetToList = data;
-     console.log('saved Widget List');
-     console.log(savedWidgetToList);
+      this.http.get(this.rootUrl + 'widget').subscribe(data => {
+     savedWidgetToList = data as WidgetToList[];
 
     });
-    console.log('saved Widget List 3');
-      console.log(savedWidgetToList);
       const dashboards = JSON.parse(savdDashboards) as Array<Dashboard>;
       this.currentdashboard = dashboards;
       dashboards.forEach((dashboard: Dashboard) => {
@@ -148,14 +144,11 @@ export class DashboardService {
 
   public saveUserDashBoards(user: User): void {
     localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
-    console.log('From save');
     this.dahboardsFromsave = this.userDashboards.get(user.id);
     const data = this.dahboardsFromsave.map(x => x.widgets)[0];
 
-    const dummy = data.map(item => new WidgetToList(item, user.id ));
-    this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' }).subscribe();
-
-    console.log(dummy);
+    //const dummy = data.map(item => new WidgetToList(item, user.id ));
+    //this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' }).subscribe();
     // console.log(this.userDashboards.get(user.id));
     // console.log('this is value from textbox : ' + this.textboxval);
   }

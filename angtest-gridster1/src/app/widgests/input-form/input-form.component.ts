@@ -24,7 +24,6 @@ export class InputFormComponent implements OnInit {
   ngOnInit() {
     this.resizeSub$ = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
-        console.log(widget);
       }
     });
 

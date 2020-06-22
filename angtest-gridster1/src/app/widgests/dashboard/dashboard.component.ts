@@ -55,10 +55,8 @@ export class DashboardComponent implements OnInit {
     const user = new User();
     user.id = '123';
     this.dashboard = this.dashboardService.getUserDashBoards(user)[0].widgets;
-    console.log(this.dashboard[this.dashboard.length - 1].id);
     // tslint:disable-next-line: radix
     this.dashboardService.idVal = parseInt(this.dashboard[this.dashboard.length - 1].id);
-    console.log(this.dashboardService.idVal);
   }
   changedOptions() {
     this.options.api.optionsChanged();
@@ -109,7 +107,6 @@ export class DashboardComponent implements OnInit {
   public onClick_AddNominationListWidget(): void {
     this.dashboardService.idVal = this.dashboardService.idVal + 1;
     this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), this.dashboardService.textboxval);
-    console.log(this.dashboardService.IDModelDictionary);
     this.dashboard.push({
      id: this.dashboardService.idVal.toString(),
      name: 'Nomination List',

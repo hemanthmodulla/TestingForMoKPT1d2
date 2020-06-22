@@ -28,15 +28,8 @@ export class BarChartComponent implements OnInit  {
    }
 
   ngOnInit() {
-    console.log('chart-----');
-    console.log(this.dashboardService.currentdashboard[0].widgets.length);
-    console.log(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null);
-
-
     // tslint:disable-next-line: max-line-length
     if (this.dashboardService.currentdashboard[0].widgets.length > 0 && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
-      console.log('after kendo count');
-      console.log(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount]);
       this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount].id);
       let reader = new FileReader();
       this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
@@ -73,7 +66,6 @@ export class BarChartComponent implements OnInit  {
     let reader = new FileReader();
     this.imagePath = files;
     this.dashboardService.IDModelDictionary.set(id, files[0]);
-    console.log(this.dashboardService.IDModelDictionary);
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgURL = reader.result;
