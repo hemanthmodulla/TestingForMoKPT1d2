@@ -147,10 +147,10 @@ export class DashboardService {
     this.dahboardsFromsave = this.userDashboards.get(user.id);
     const data = this.dahboardsFromsave.map(x => x.widgets)[0];
 
-    //const dummy = data.map(item => new WidgetToList(item, user.id ));
-    //this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' }).subscribe();
-    // console.log(this.userDashboards.get(user.id));
-    // console.log('this is value from textbox : ' + this.textboxval);
+    const dummy = data.map(item => new WidgetToList(item, user.id ));
+    this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' }).subscribe();
+    //console.log(this.userDashboards.get(user.id));
+    //console.log('this is value from textbox : ' + this.textboxval);
   }
 
   public getDashBoardOptions(): DashboardOptions {
