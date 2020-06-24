@@ -36,9 +36,6 @@ export class DashboardComponent implements OnInit {
   };
 
   ngOnInit() {
-
-    
-
     this.options = this.dashboardService.getDashBoardOptions();
     this.options.displayGrid = DisplayGrid.OnDragAndResize;
     this.options.itemChangeCallback = (item) => {
@@ -54,7 +51,7 @@ export class DashboardComponent implements OnInit {
 
     const user = new User();
     user.id = '123';
-    this.dashboard = this.dashboardService.getUserDashBoards(user)[0].widgets;
+    this.dashboard = this.dashboardService.getUserDashBoards(user).widgets;
     // tslint:disable-next-line: radix
     this.dashboardService.idVal = parseInt(this.dashboard[this.dashboard.length - 1].id);
   }
@@ -79,13 +76,7 @@ export class DashboardComponent implements OnInit {
   public onClick_LoadUserDashboard1(): void {
    const user = new User();
    user.id = '123';
-   this.dashboard = this.dashboardService.getUserDashBoards(user)[0].widgets;
- }
-
- public onClick_LoadUserDashboard2(): void {
-   const user = new User();
-   user.id = '123';
-   this.dashboard = this.dashboardService.getUserDashBoards(user)[1].widgets;
+   this.dashboard = this.dashboardService.getUserDashBoards(user).widgets;
  }
 
   public onClick_AddChartWidget(): void {

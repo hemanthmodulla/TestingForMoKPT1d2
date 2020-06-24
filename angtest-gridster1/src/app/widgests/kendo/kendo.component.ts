@@ -159,16 +159,17 @@ export class KendoComponent implements OnInit {
   private messageCount = 0;
   ngOnInit() {
 
-    if (this.dashboardService.currentdashboard[0].widgets.length > 0 && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
-      this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount].id);
-      this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
-    }
-    else{
-
     // tslint:disable-next-line: max-line-length
-    this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.currentdashboard[0].widgets.length - 1].id);
+    if (this.dashboardService.currentdashboard.widgets.length > 0 && this.dashboardService.currentdashboard.widgets[this.dashboardService.kendocount] !=  null) {
+      this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.kendocount].id);
+      this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
+    } else if (this.dashboardService.currentdashboard.widgets.length === 0 ) {
+      this.idvalue = 1;
+    } else {
+    // tslint:disable-next-line: max-line-length
+      this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.currentdashboard.widgets.length - 1].id);
     }
-    
+
 
    // this.idvalue =  Number(this.dashboardService.idVal);
     this.wid = this.widget;
@@ -193,7 +194,7 @@ export class KendoComponent implements OnInit {
     this.messageCount++;
     this.widgetCommunicationService.sendDataToSubscribers('message from nomination list ' + this.messageCount);
   }
-  public getPosition($event){
+  public getPosition($event) {
   }
 
 }

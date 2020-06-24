@@ -23,13 +23,13 @@ interface IDashboardService {
 })
 
 export class DashboardService {
-  private userDashboards: Map<string, Array<Dashboard>> = new Map<string, Array<Dashboard>>();
+  private userDashboards: Map<string, Dashboard> = new Map<string, Dashboard>();
   IDModelDictionary = new Map<string, any>();
   public idVal = 0;
   readonly rootUrl = 'http://localhost:5000/api/';
   private defaultUser: User;
-  public currentdashboard = Array<Dashboard>();
-  public dahboardsFromsave = Array<Dashboard>();
+  public currentdashboard = new Dashboard();
+  public dahboardFromSave = new Dashboard ();
 
   textboxval = '';
   kendocount = 0;
@@ -40,7 +40,6 @@ export class DashboardService {
    private loadDashBoards(): void {
      this.defaultUser = new User();
      this.defaultUser.id = '123';
-     let savedWidgetToList: WidgetToList[];
 
      if (localStorage.getItem(this.defaultUser.id) ) {
       if (localStorage.getItem('dictionary1') ) {
@@ -49,18 +48,14 @@ export class DashboardService {
         // tslint:disable-next-line: forin
         for (const value in jsonObject2) {
             map.set(value, jsonObject2[value]);
-            }
+        }
         this.IDModelDictionary = map;
       }
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
-      this.http.get(this.rootUrl + 'widget').subscribe(data => {
-     console.log(data);
-
-    });
-      const dashboards = JSON.parse(savdDashboards) as Array<Dashboard>;
+      this.http.get(this.rootUrl + 'widget').subscribe(data => {});
+      const dashboards = JSON.parse(savdDashboards) as Dashboard;
       this.currentdashboard = dashboards;
-      dashboards.forEach((dashboard: Dashboard) => {
-        dashboard.widgets.forEach((widget: Widget) => {
+      dashboards.widgets.forEach((widget: Widget) => {
           if (widget.componentName === 'kendo-widget') {
             widget.componentType = KendoComponent;
             this.idVal = Number(widget.id);
@@ -80,77 +75,65 @@ export class DashboardService {
           // if (widget.componentName === "operator-widget") {
           //   widget.componentType = OperatorWidgetComponent;
           // }
-        });
       });
       this.userDashboards.set(this.defaultUser.id, dashboards);
     } else {
-      const dashBoards = new Array<Dashboard>();
-      dashBoards.push({
-      id: '1', name: 'dashboard-1', user: this.defaultUser, widgets: [
-        {
+      this.currentdashboard.widgets = new Array<Widget>();
+      const dashBoards = new Dashboard();
+      dashBoards.id = '1';
+      dashBoards.name = 'dashboard-1';
+      dashBoards.user = this.defaultUser;
+
+      dashBoards.widgets = [{
           id: '1',
           name: 'Nomination List',
-          componentName: 'kendo-widget',
-          componentType: KendoComponent,
-          cols: 2,
-          rows: 1,
-          y: 0,
-          x: 0,
-          model: this.textboxval,
+          componentName : 'kendo-widget',
+          componentType : KendoComponent,
+          cols : 2,
+          rows : 1,
+          y : 0,
+          x : 0,
+          model : this.textboxval,
         },
-        {
+      {
           id: '2',
-          name: 'Edit Nomination',
-          componentName: 'input-form',
-          componentType: InputFormComponent,
-          cols: 2,
-          rows: 1,
-          y: 0,
-          x: 2,
-          model: new Textbox(),
+          name : 'Edit Nomination',
+          componentName : 'input-form',
+          componentType : InputFormComponent,
+          cols : 2,
+          rows : 1,
+          y : 0,
+          x : 2,
+          model : new Textbox(),
         },
-        {
+      {
           id: '3',
-          name: 'Chart',
-          componentName: 'bar-chart',
-          componentType: BarChartComponent,
-          cols: 2,
-          rows: 2,
-          y: 0,
+          name : 'Chart',
+          componentName : 'bar-chart',
+          componentType : BarChartComponent,
+          cols : 2,
+          rows : 2,
+          y : 0,
           x: 0,
-          model: new Textbox(),
-        },
-        {
-          id: '4',
-          name: 'textbox',
-          componentName: 'textbox',
-          componentType: TextboxComponent,
-          cols: 2,
-          rows: 1,
-          y: 0,
-          x: 0,
-          model:  {v: 'hhh'} as Textbox,
+          model : new Textbox(),
         }
-      ]
-      });
+      ];
 
       this.userDashboards.set(this.defaultUser.id, dashBoards);
     }
   }
 
-  public getUserDashBoards(user: User): Array<Dashboard> {
+  public getUserDashBoards(user: User): Dashboard {
     return this.userDashboards.get(user.id);
   }
 
   public saveUserDashBoards(user: User): void {
     localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
-    this.dahboardsFromsave = this.userDashboards.get(user.id);
-    const data = this.dahboardsFromsave.map(x => x.widgets)[0];
+    this.dahboardFromSave = this.userDashboards.get(user.id);
 
-    const dummy = data.map(item => new WidgetToList(item, user.id ));
-    this.http.post('http://localhost:5000/api' + '/Widget', dummy, { observe: 'response' }).subscribe();
-    //console.log(this.userDashboards.get(user.id));
-    //console.log('this is value from textbox : ' + this.textboxval);
+    // used to save widgets[] to database
+    const dataToSave = this.dahboardFromSave.widgets.map(item => new WidgetToList(item, user.id ));
+    this.http.post('http://localhost:5000/api' + '/Widget', dataToSave, { observe: 'response' }).subscribe();
   }
 
   public getDashBoardOptions(): DashboardOptions {

@@ -29,18 +29,19 @@ export class BarChartComponent implements OnInit  {
 
   ngOnInit() {
     // tslint:disable-next-line: max-line-length
-    if (this.dashboardService.currentdashboard[0].widgets.length > 0 && this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount] !=  null) {
-      this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.kendocount].id);
+    if (this.dashboardService.currentdashboard.widgets.length > 0 && this.dashboardService.currentdashboard.widgets[this.dashboardService.kendocount] !=  null) {
+      this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.kendocount].id);
       let reader = new FileReader();
       this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
-     
       reader.readAsDataURL(this.imageVal);
       this.imgURL = reader.result;
 
+    } else if (this.dashboardService.currentdashboard.widgets.length === 0 ) {
+      this.idvalue = 1;
     } else {
 
     // tslint:disable-next-line: max-line-length
-    this.idvalue =  Number(this.dashboardService.currentdashboard[0].widgets[this.dashboardService.currentdashboard[0].widgets.length - 1].id);
+    this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.currentdashboard.widgets.length - 1].id);
     }
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) {
