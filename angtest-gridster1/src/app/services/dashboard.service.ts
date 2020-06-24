@@ -37,7 +37,7 @@ export class DashboardService {
     this.loadDashBoards();
    }
 
-   private loadDashBoards(): void {
+   public loadDashBoards(): void {
      this.defaultUser = new User();
      this.defaultUser.id = '123';
 
@@ -51,6 +51,11 @@ export class DashboardService {
         }
         this.IDModelDictionary = map;
       }
+
+      const dummy = this.http.get('http://localhost:5000/api/Widget').subscribe(x => {console.log(x)});
+      console.log(dummy);
+
+
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
       this.http.get(this.rootUrl + 'widget').subscribe(data => {});
       const dashboards = JSON.parse(savdDashboards) as Dashboard;
