@@ -36,42 +36,41 @@ export class DashboardService {
   textboxval = '';
   kendocount = 0;
   constructor(private http: HttpClient) {
-    this.loadDashBoards();
+    // this.loadDashBoards();
    }
 
-   public loadDashBoards(): void {
+   public loadDashBoards(): Promise<void | Widget[]> {
+     console.log('initialize Load Dashboards method');
      this.defaultUser = new User();
      this.defaultUser.id = '123';
-
-     if (localStorage.getItem(this.defaultUser.id) ) {
-      if (localStorage.getItem('dictionary1') ) {
-        const jsonObject2 = JSON.parse(localStorage.getItem('dictionary1'));
-        const map = new Map<string, string>();
-        // tslint:disable-next-line: forin
-        for (const value in jsonObject2) {
-            map.set(value, jsonObject2[value]);
-        }
-        this.IDModelDictionary = map;
-      }
-
-      console.log('get stuff from service');
-      console.log(this.defaultUser.id);
-      //////////////change here
-      this.http.get<Widget[]>('http://localhost:5000/api/Widget', {
+     localStorage.clear();
+    //  if (localStorage.getItem('dictionary1') ) {
+    //     const jsonObject2 = JSON.parse(localStorage.getItem('dictionary1'));
+    //     const map = new Map<string, string>();
+    //     // tslint:disable-next-line: forin
+    //     for (const value in jsonObject2) {
+    //         map.set(value, jsonObject2[value]);
+    //     }
+    //     this.IDModelDictionary = map;
+    //   }
+     const dashBoards = new Dashboard();
+     dashBoards.id = '1';
+     dashBoards.name = 'dashboard-1';
+     dashBoards.user = this.defaultUser;
+     dashBoards.widgets = new Array<Widget>();
+     console.log('get stuff from service');
+     console.log(this.defaultUser.id);
+      ////////////// change here
+     return (this.http.get<Widget[]>('http://localhost:5000/api/Widget', {
         params: {
           id: this.defaultUser.id,
         },
-      });
-
-
-      const savdDashboards = localStorage.getItem(this.defaultUser.id);
-      //this.http.get(this.rootUrl + 'widget').subscribe(data => {});
-      const dashboards = JSON.parse(savdDashboards) as Dashboard;
-      dashboards.widgets = this.dummy;//////////////change here
-
-
-      this.currentdashboard = dashboards;
-      dashboards.widgets.forEach((widget: Widget) => {
+      }).toPromise().then(x => {
+        console.log('Hit Dashboard comp then');
+        this.dummy = x;
+        dashBoards.widgets = x;
+        this.currentdashboard = dashBoards;
+        dashBoards.widgets.forEach((widget: Widget) => {
           if (widget.componentName === 'kendo-widget') {
             widget.componentType = KendoComponent;
             this.idVal = Number(widget.id);
@@ -92,51 +91,13 @@ export class DashboardService {
           //   widget.componentType = OperatorWidgetComponent;
           // }
       });
-      this.userDashboards.set(this.defaultUser.id, dashboards);
-    } else {
-      this.currentdashboard.widgets = new Array<Widget>();
-      const dashBoards = new Dashboard();
-      dashBoards.id = '1';
-      dashBoards.name = 'dashboard-1';
-      dashBoards.user = this.defaultUser;
+        this.userDashboards.set(this.defaultUser.id, dashBoards);
+      }));
 
-      dashBoards.widgets = [{
-          id: '1',
-          name: 'Nomination List',
-          componentName : 'kendo-widget',
-          componentType : KendoComponent,
-          cols : 2,
-          rows : 1,
-          y : 0,
-          x : 0,
-          model : this.textboxval,
-        },
-      {
-          id: '2',
-          name : 'Edit Nomination',
-          componentName : 'input-form',
-          componentType : InputFormComponent,
-          cols : 2,
-          rows : 1,
-          y : 0,
-          x : 2,
-          model : new Textbox(),
-        },
-      {
-          id: '3',
-          name : 'Chart',
-          componentName : 'bar-chart',
-          componentType : BarChartComponent,
-          cols : 2,
-          rows : 2,
-          y : 0,
-          x: 0,
-          model : new Textbox(),
-        }
-      ];
+      // const savdDashboards = localStorage.getItem(this.defaultUser.id);
+      // this.http.get(this.rootUrl + 'widget').subscribe(data => {});
+      // const dashboards = JSON.parse(savdDashboards) as Dashboard;
 
-      this.userDashboards.set(this.defaultUser.id, dashBoards);
-    }
   }
 
   public getUserDashBoards(user: User): Dashboard {
@@ -144,10 +105,15 @@ export class DashboardService {
   }
 
   public saveUserDashBoards(user: User): void {
-    localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
-    this.dahboardFromSave = this.userDashboards.get(user.id);
+    // localStorage.setItem(user.id, JSON.stringify(this.userDashboards.get(user.id)));
 
     // used to save widgets[] to database
+    this.dahboardFromSave = this.userDashboards.get(user.id);
+    console.log('From Save');
+    console.log(this.dahboardFromSave);
+    const du = new WidgetToList(this.dahboardFromSave.widgets[0], user.id );
+
+
     const dataToSave = this.dahboardFromSave.widgets.map(item => new WidgetToList(item, user.id ));
     this.http.post('http://localhost:5000/api' + '/Widget', dataToSave, { observe: 'response' }).subscribe();
   }

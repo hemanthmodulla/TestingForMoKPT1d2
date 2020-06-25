@@ -2,7 +2,7 @@ import { Widget } from './widget.model';
 
 export class WidgetToList {
     UserID: string;
-    WidgetID: string;
+    id: string;
     name: string;
     componentName: string;
     cols: number;
@@ -15,7 +15,7 @@ export class WidgetToList {
     constructor(item: Widget , userid : string)
     {
         this.UserID = userid;
-        this.WidgetID = item.id;
+        this.id = item.id;
         this.name = item.name;
         this.componentName = item.componentName;
         this.cols = item.cols;
