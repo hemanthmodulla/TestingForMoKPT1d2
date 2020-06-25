@@ -9,6 +9,7 @@ import { TextboxComponent } from '../textbox/textbox.component';
 import { Textbox } from 'src/app/models/textbox.model';
 import {HttpClient} from '@angular/common/http';
 import { Widget } from 'src/app/models/widget.model';
+import { WidgetToList } from 'src/app/models/widget-to-list.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -48,7 +49,6 @@ export class DashboardComponent implements OnInit {
       // send the update to widgets
       this.resizeEvent.emit(item);
     };
-
     const user = new User();
     user.id = '123';
     this.dashboard = this.dashboardService.getUserDashBoards(user).widgets;

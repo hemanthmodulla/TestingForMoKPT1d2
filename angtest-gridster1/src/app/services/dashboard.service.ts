@@ -12,6 +12,7 @@ import { TextboxComponent } from '../widgests/textbox/textbox.component';
 import { TSMap } from 'typescript-map';
 import { WidgetToList } from '../models/widget-to-list.model';
 import { HttpClient } from '@angular/common/http';
+import { Console } from 'console';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -30,6 +31,7 @@ export class DashboardService {
   private defaultUser: User;
   public currentdashboard = new Dashboard();
   public dahboardFromSave = new Dashboard ();
+  public dummy = new Array<Widget>();
 
   textboxval = '';
   kendocount = 0;
@@ -52,13 +54,22 @@ export class DashboardService {
         this.IDModelDictionary = map;
       }
 
-      const dummy = this.http.get('http://localhost:5000/api/Widget').subscribe(x => {console.log(x)});
-      console.log(dummy);
+      console.log('get stuff from service');
+      console.log(this.defaultUser.id);
+      //////////////change here
+      this.http.get<Widget[]>('http://localhost:5000/api/Widget', {
+        params: {
+          id: this.defaultUser.id,
+        },
+      });
 
 
       const savdDashboards = localStorage.getItem(this.defaultUser.id);
-      this.http.get(this.rootUrl + 'widget').subscribe(data => {});
+      //this.http.get(this.rootUrl + 'widget').subscribe(data => {});
       const dashboards = JSON.parse(savdDashboards) as Dashboard;
+      dashboards.widgets = this.dummy;//////////////change here
+
+
       this.currentdashboard = dashboards;
       dashboards.widgets.forEach((widget: Widget) => {
           if (widget.componentName === 'kendo-widget') {
