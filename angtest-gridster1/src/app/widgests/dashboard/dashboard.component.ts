@@ -10,6 +10,7 @@ import { Textbox } from 'src/app/models/textbox.model';
 import {HttpClient} from '@angular/common/http';
 import { Widget } from 'src/app/models/widget.model';
 import { WidgetToList } from 'src/app/models/widget-to-list.model';
+import { CheckboxComponent } from '../checkbox/checkbox.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -131,6 +132,23 @@ export class DashboardComponent implements OnInit {
     y: 0,
     x: 0,
     model:  {v: 'hhh'} as Textbox,
+  });
+
+}
+
+public onClick_AddCheckbox(): void {
+  this.dashboardService.idVal = this.dashboardService.idVal + 1;
+  this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), this.dashboardService.textboxval);
+  this.dashboard.push({
+    id: this.dashboardService.idVal.toString(),
+    name: 'Check Box',
+    componentName: 'checkbox',
+    componentType: CheckboxComponent,
+    cols: 2,
+    rows: 1,
+    y: 0,
+    x: 0,
+    model:  '',
   });
 
 }
