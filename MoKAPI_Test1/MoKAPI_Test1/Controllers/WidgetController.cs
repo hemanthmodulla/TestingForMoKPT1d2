@@ -77,9 +77,30 @@ namespace MoKAPI_Test1.Controllers
             //public ActionResult Post([FromBody] RegisterClass userInformation)
         }
 
+        //[HttpPost]
+        //public void Post([FromBody] string uID, string wID, string modInfo)
+        //{
+
+
+        //}
+
+        public class ModelInfo
+        {
+            public string userID { get; set; }
+            public string widgetID { get; set; }
+            public string modelInfo { get; set; }
+
+        }
+
+        //PUT: api/Widget/5
+        //[HttpPut]
+        //public void Put(ModelInfo modelInfo)
+        //{
+        //}
+
         // PUT: api/Widget/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] ModelInfo modelInfo)
         {
         }
 

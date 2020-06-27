@@ -144,8 +144,10 @@ export class DashboardComponent implements OnInit {
   user.id = '123';
   this.dashboardService.saveUserDashBoards(user);
   const jsonObject = {};
+
   this.dashboardService.IDModelDictionary.forEach((value, key) => {
       jsonObject[key] = value;
+      console.log(this.dashboardService.IDModelDictionary);
   });
 
   localStorage.setItem('dictionary1', JSON.stringify(jsonObject));

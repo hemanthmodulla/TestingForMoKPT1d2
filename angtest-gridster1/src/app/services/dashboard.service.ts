@@ -12,7 +12,6 @@ import { TextboxComponent } from '../widgests/textbox/textbox.component';
 import { TSMap } from 'typescript-map';
 import { WidgetToList } from '../models/widget-to-list.model';
 import { HttpClient } from '@angular/common/http';
-import { Console } from 'console';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -68,7 +67,14 @@ export class DashboardService {
       }).toPromise().then(x => {
         console.log('Hit Dashboard comp then');
         this.dummy = x;
+        console.log(this.dummy);
         dashBoards.widgets = x;
+        for (let i = 0; i < dashBoards.widgets.length; i++) {
+          console.log(dashBoards.widgets[i]);
+          this.IDModelDictionary.set(dashBoards.widgets[i].id, dashBoards.widgets[i].model);
+          
+        }
+        console.log(this.IDModelDictionary)
         this.currentdashboard = dashBoards;
         dashBoards.widgets.forEach((widget: Widget) => {
           if (widget.componentName === 'kendo-widget') {
@@ -115,8 +121,40 @@ export class DashboardService {
 
 
     const dataToSave = this.dahboardFromSave.widgets.map(item => new WidgetToList(item, user.id ));
+    console.log(dataToSave);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < dataToSave.length; i++) {
+      this.IDModelDictionary.forEach((value, key) => {
+        console.log('key' + key);
+        console.log('dataToSave[i].id.toString()' + dataToSave[i].id.toString());
+        if ( dataToSave[i].id.toString() === key.toString()) {
+          console.log('inside');
+          dataToSave[i].model = value;
+          
+        }
+
+        // this.dashboardService.updateModel(user.id,key,value);
+    });
+
+    }
+
     this.http.post('http://localhost:5000/api' + '/Widget', dataToSave, { observe: 'response' }).subscribe();
   }
+
+  // public updateModel(userid: string, widgetid:string, modelinfo: string){
+  //   let completeModel: ModelInfo;
+  //   completeModel = new ModelInfo();
+  //   console.log(userid);
+  //   console.log(widgetid);
+  //   console.log(modelinfo);
+  //   completeModel.userID = userid;
+  //   completeModel.widgetID = widgetid;
+  //   completeModel.modelInfo = modelinfo;
+  //   console.log('update model');
+  //   console.log(completeModel);
+
+  //   this.http.put('http://localhost:5000/api/Widget/1', completeModel)
+  // }
 
   public getDashBoardOptions(): DashboardOptions {
     return {
