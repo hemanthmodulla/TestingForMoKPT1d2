@@ -43,10 +43,6 @@ export class BarChartComponent implements OnInit  {
     // tslint:disable-next-line: max-line-length
     this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.currentdashboard.widgets.length - 1].id);
     }
-    this.resizeSub = this.resizeEvent.subscribe((widget) => {
-      if (widget === this.widget) {
-      }
-    });
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -54,6 +50,7 @@ export class BarChartComponent implements OnInit  {
     this.resizeSub.unsubscribe();
   }
   preview(files , id: string) {
+    console.log(files.length);
     if (files.length === 0) {
       return;
     }
@@ -66,10 +63,11 @@ export class BarChartComponent implements OnInit  {
 
     let reader = new FileReader();
     this.imagePath = files;
-    this.dashboardService.IDModelDictionary.set(id, files[0]);
+   
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgURL = reader.result;
+      this.dashboardService.IDModelDictionary.set(id, reader.result);
     };
   }
 
