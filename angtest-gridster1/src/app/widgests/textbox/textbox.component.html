@@ -1,3 +1,10 @@
+<label  class="image-upload-container btn btn-bwm">
+    <span>Select Image</span>
+    <input #imageInput id="{{this.idvalue}}" 
+           type="file"
+           accept="image/*"
+           (change)="saveImage(imageInput, imageInput.id )">
+  </label>
 
-<input class="form-control"  [(ngModel)]="txtbox.v" type="text">
-hi {{txtbox.v}}
+  <img  src={{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}>
+

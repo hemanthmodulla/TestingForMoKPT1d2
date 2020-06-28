@@ -125,12 +125,10 @@ export class DashboardService {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < dataToSave.length; i++) {
       this.IDModelDictionary.forEach((value, key) => {
-        console.log('key' + key);
-        console.log('dataToSave[i].id.toString()' + dataToSave[i].id.toString());
+
         if ( dataToSave[i].id.toString() === key.toString()) {
-          console.log('inside');
-          dataToSave[i].model = value;
           
+          dataToSave[i].model = value;
         }
 
         // this.dashboardService.updateModel(user.id,key,value);
