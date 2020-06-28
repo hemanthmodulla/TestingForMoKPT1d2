@@ -25,6 +25,7 @@ import { Example1Component } from './widgets/example1/example1.component';
 import { TextboxComponent } from './widgests/textbox/textbox.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { CheckboxComponent } from './widgests/checkbox/checkbox.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     InputFormComponent,
     Example1Component,
     TextboxComponent,
+    CheckboxComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { HttpClientModule } from '@angular/common/http';
     KendoComponent,
     InputFormComponent,
     Example1Component,
-    TextboxComponent
+    TextboxComponent,
+    CheckboxComponent
   ],
   bootstrap: [AppComponent],
 })

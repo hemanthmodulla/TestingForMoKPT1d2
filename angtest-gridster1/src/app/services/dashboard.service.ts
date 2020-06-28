@@ -12,6 +12,7 @@ import { TextboxComponent } from '../widgests/textbox/textbox.component';
 import { TSMap } from 'typescript-map';
 import { WidgetToList } from '../models/widget-to-list.model';
 import { HttpClient } from '@angular/common/http';
+import { CheckboxComponent } from '../widgests/checkbox/checkbox.component';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -93,9 +94,9 @@ export class DashboardService {
             widget.componentType = TextboxComponent;
             this.idVal = Number(widget.id);
           }
-          // if (widget.componentName === "operator-widget") {
-          //   widget.componentType = OperatorWidgetComponent;
-          // }
+          if (widget.componentName === "checkbox") {
+            widget.componentType = CheckboxComponent;
+          }
       });
         this.userDashboards.set(this.defaultUser.id, dashBoards);
       }));
@@ -121,13 +122,10 @@ export class DashboardService {
 
 
     const dataToSave = this.dahboardFromSave.widgets.map(item => new WidgetToList(item, user.id ));
-    console.log(dataToSave);
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < dataToSave.length; i++) {
       this.IDModelDictionary.forEach((value, key) => {
-
         if ( dataToSave[i].id.toString() === key.toString()) {
-          
           dataToSave[i].model = value;
         }
 

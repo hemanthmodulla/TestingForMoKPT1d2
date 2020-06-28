@@ -1,0 +1,4 @@
+<p>checkbox works!</p>
+<form>
+    <input #checkbox type="checkbox" (click)='doIfChecked($event, checkbox.id )' [checked]="this.dashboardService.IDModelDictionary.get(this.idvalue.toString())== 'checked'" id="{{this.idvalue}}">fast delivery
+</form>

@@ -84,13 +84,7 @@ namespace MoKAPI_Test1.Controllers
 
         //}
 
-        public class ModelInfo
-        {
-            public string userID { get; set; }
-            public string widgetID { get; set; }
-            public string modelInfo { get; set; }
-
-        }
+        
 
         //PUT: api/Widget/5
         //[HttpPut]
@@ -98,11 +92,7 @@ namespace MoKAPI_Test1.Controllers
         //{
         //}
 
-        // PUT: api/Widget/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ModelInfo modelInfo)
-        {
-        }
+       
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
