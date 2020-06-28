@@ -26,6 +26,7 @@ import { TextboxComponent } from './widgests/textbox/textbox.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CheckboxComponent } from './widgests/checkbox/checkbox.component';
+import { ImageComponent } from './widgests/image/image.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { CheckboxComponent } from './widgests/checkbox/checkbox.component';
     Example1Component,
     TextboxComponent,
     CheckboxComponent,
+    ImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,13 +57,15 @@ import { CheckboxComponent } from './widgests/checkbox/checkbox.component';
     
     HttpClientModule,
     // tslint:disable-next-line: deprecation
-    DynamicModule.withComponents([KendoComponent, InputFormComponent, BarChartComponent])
+    DynamicModule.withComponents([KendoComponent, InputFormComponent, BarChartComponent,ImageComponent,CheckboxComponent])
   ],
   exports: [
     DashboardComponent,
     KendoComponent,
     InputFormComponent,
-    BarChartComponent
+    BarChartComponent,
+    ImageComponent,
+    CheckboxComponent
   ],
   providers: [
     DashboardService,
@@ -73,7 +77,8 @@ import { CheckboxComponent } from './widgests/checkbox/checkbox.component';
     InputFormComponent,
     Example1Component,
     TextboxComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    ImageComponent
   ],
   bootstrap: [AppComponent],
 })

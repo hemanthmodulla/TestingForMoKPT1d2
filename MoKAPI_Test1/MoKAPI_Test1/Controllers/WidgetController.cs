@@ -69,7 +69,6 @@ namespace MoKAPI_Test1.Controllers
                                    };
             string uID = widgetTableItems.First().UserID;
             _context.WidgetTable.RemoveRange(_context.WidgetTable.Where(x => x.UserID == uID));
-            _context.SaveChanges();
 
             _context.WidgetTable.AddRange(widgetTableItems);
             _context.SaveChanges();

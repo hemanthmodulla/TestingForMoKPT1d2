@@ -11,6 +11,7 @@ import {HttpClient} from '@angular/common/http';
 import { Widget } from 'src/app/models/widget.model';
 import { WidgetToList } from 'src/app/models/widget-to-list.model';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { ImageComponent } from '../image/image.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -119,19 +120,19 @@ export class DashboardComponent implements OnInit {
 
  }
 
- public onClick_AddTextBox(): void {
+ public onClick_AddImage(): void {
   this.dashboardService.idVal = this.dashboardService.idVal + 1;
-  this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), this.dashboardService.textboxval);
+  this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), '');
   this.dashboard.push({
     id: this.dashboardService.idVal.toString(),
-    name: 'Text Box',
-    componentName: 'textbox',
-    componentType: TextboxComponent,
+    name: 'Image Comp',
+    componentName: 'Image',
+    componentType: ImageComponent,
     cols: 2,
     rows: 1,
     y: 0,
     x: 0,
-    model:  {v: 'hhh'} as Textbox,
+    model:  '',
   });
 
 }

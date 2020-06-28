@@ -26,6 +26,7 @@ export class DashboardOptions {
     keepFixedWidthInMobile: boolean;
     scrollSensitivity: number;
     scrollSpeed: number;
+    setGridSize?: boolean;
     enableEmptyCellClick: boolean;
     enableEmptyCellContextMenu: boolean;
     enableEmptyCellDrop: boolean;
