@@ -13,6 +13,7 @@ import { TSMap } from 'typescript-map';
 import { WidgetToList } from '../models/widget-to-list.model';
 import { HttpClient } from '@angular/common/http';
 import { CheckboxComponent } from '../widgests/checkbox/checkbox.component';
+import { ImageComponent } from '../widgests/image/image.component';
 
 interface IDashboardService {
   getUserDashBoards(user: User): Array<Dashboard>;
@@ -90,12 +91,13 @@ export class DashboardService {
             widget.componentType = BarChartComponent;
             this.idVal = Number(widget.id);
           }
-          if (widget.componentName === 'textbox') {
-            widget.componentType = TextboxComponent;
+          if (widget.componentName === 'Image') {
+            widget.componentType = ImageComponent;
             this.idVal = Number(widget.id);
           }
-          if (widget.componentName === "checkbox") {
+          if (widget.componentName === 'checkbox') {
             widget.componentType = CheckboxComponent;
+            this.idVal = Number(widget.id);
           }
       });
         this.userDashboards.set(this.defaultUser.id, dashBoards);
@@ -127,7 +129,6 @@ export class DashboardService {
       this.IDModelDictionary.forEach((value, key) => {
         if ( dataToSave[i].id.toString() === key.toString()) {
           dataToSave[i].model = value;
-          
         }
 
         // this.dashboardService.updateModel(user.id,key,value);
@@ -155,9 +156,9 @@ export class DashboardService {
 
   public getDashBoardOptions(): DashboardOptions {
     return {
-      gridType: GridType.Fit,
+      gridType: GridType.ScrollVertical,
       compactType: CompactType.None,
-      margin: 10,
+      margin: 5,
       outerMargin: true,
       outerMarginTop: null,
       outerMarginRight: null,
@@ -165,9 +166,9 @@ export class DashboardService {
       outerMarginLeft: null,
       mobileBreakpoint: 640,
       minCols: 1,
-      maxCols: 100,
+      maxCols: 30,
       minRows: 1,
-      maxRows: 100,
+      maxRows: 500,
       maxItemCols: 100,
       minItemCols: 1,
       maxItemRows: 100,
@@ -182,6 +183,7 @@ export class DashboardService {
       keepFixedWidthInMobile: false,
       scrollSensitivity: 10,
       scrollSpeed: 20,
+      setGridSize: false,
       enableEmptyCellClick: false,
       enableEmptyCellContextMenu: false,
       enableEmptyCellDrop: false,
