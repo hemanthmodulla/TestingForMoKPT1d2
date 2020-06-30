@@ -37,7 +37,7 @@ export class DashboardService {
   textboxval = '';
   kendocount = 0;
   constructor(private http: HttpClient) {
-    // this.loadDashBoards();
+     //this.loadDashBoards();
    }
 
    public loadDashBoards(): Promise<void | Widget[]> {
@@ -111,6 +111,12 @@ export class DashboardService {
 
   public getUserDashBoards(user: User): Dashboard {
     return this.userDashboards.get(user.id);
+  }
+
+  public startEditMode(widgetid: string){
+   console.log('from editmode ' + widgetid);
+   console.log('widgets ');
+   console.log(this.userDashboards.get(this.defaultUser.id));
   }
 
   public saveUserDashBoards(user: User): void {

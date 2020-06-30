@@ -18,10 +18,10 @@
     <gridster [options]="options" style="background-color:gray">
         <gridster-item [item]="widget" *ngFor="let widget of dashboard">
               <div class=" gridster-item-content" style="height: 100%; margin: 5px;">
-                <a href="#"><img class="drag-handler" src="file-svg-move-icon-11563347037wxavun0mrl.png" style="cursor: move;" width="30px" ></a> 
+                <a href="#"><mat-icon class="drag-handler">open_with</mat-icon></a> 
                 <a class="widget-header-btn" (mousedown)="onClick_removeItem($event, widget)"
                           (touchstart)="onClick_removeItem($event, widget)">
-                          <i class="fa fa-window-close" aria-hidden="true"></i> xx</a>
+                         <mat-icon>cancel</mat-icon></a>
                 <ndc-dynamic [ndcDynamicComponent]="widget.componentType"
                  (ndcDynamicInputs)="inputs"
                  (ndcDynamicOutputs)="outputs"></ndc-dynamic>

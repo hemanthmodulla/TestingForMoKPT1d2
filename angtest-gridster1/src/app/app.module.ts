@@ -27,6 +27,11 @@ import { TextboxComponent } from './widgests/textbox/textbox.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CheckboxComponent } from './widgests/checkbox/checkbox.component';
 import { ImageComponent } from './widgests/image/image.component';
+import { EditComponent } from './widgests/edit/edit.component';
+import { MatIconModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 
 @NgModule({
@@ -40,6 +45,7 @@ import { ImageComponent } from './widgests/image/image.component';
     TextboxComponent,
     CheckboxComponent,
     ImageComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,10 +60,11 @@ import { ImageComponent } from './widgests/image/image.component';
     NotificationModule,
     DatePickerModule,
     PopupModule,
-    
+    MatIconModule,
     HttpClientModule,
     // tslint:disable-next-line: deprecation
-    DynamicModule.withComponents([KendoComponent, InputFormComponent, BarChartComponent,ImageComponent,CheckboxComponent])
+    DynamicModule.withComponents([KendoComponent, InputFormComponent, BarChartComponent,ImageComponent,CheckboxComponent]),
+    BrowserAnimationsModule
   ],
   exports: [
     DashboardComponent,
@@ -65,7 +72,8 @@ import { ImageComponent } from './widgests/image/image.component';
     InputFormComponent,
     BarChartComponent,
     ImageComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    MatIconModule
   ],
   providers: [
     DashboardService,

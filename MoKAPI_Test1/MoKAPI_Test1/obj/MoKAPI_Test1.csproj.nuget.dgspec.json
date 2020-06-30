@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MoK_PT1testing\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj": {}
+    "D:\\Tanvi\\Mok_PT1.2_test\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj": {}
   },
   "projects": {
-    "D:\\MoK_PT1testing\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj": {
+    "D:\\Tanvi\\Mok_PT1.2_test\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MoK_PT1testing\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj",
+        "projectUniqueName": "D:\\Tanvi\\Mok_PT1.2_test\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj",
         "projectName": "MoKAPI_Test1",
-        "projectPath": "D:\\MoK_PT1testing\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj",
-        "packagesPath": "C:\\Users\\heman\\.nuget\\packages\\",
-        "outputPath": "D:\\MoK_PT1testing\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\obj\\",
+        "projectPath": "D:\\Tanvi\\Mok_PT1.2_test\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\MoKAPI_Test1.csproj",
+        "packagesPath": "C:\\Users\\tanvi\\.nuget\\packages\\",
+        "outputPath": "D:\\Tanvi\\Mok_PT1.2_test\\TestingForMoKPT1d2\\MoKAPI_Test1\\MoKAPI_Test1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\heman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tanvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
