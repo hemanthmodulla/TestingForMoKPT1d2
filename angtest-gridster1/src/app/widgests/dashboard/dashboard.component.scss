@@ -29,7 +29,7 @@ gridster {
   
   .widget-header {
     background-color: #eeeeee;
-    cursor: move;
+    
   }
   
   .widget-header-btn {
@@ -51,4 +51,10 @@ gridster {
   app-nomination-widget {
     height: 100%;
   }
+  .move-icon {
+    background: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Ftoppng.com%2Ffile-svg-move-icon-PNG-free-PNG-Images_242767%3Fsearch-result%3Dmoney-icon-png-black&psig=AOvVaw22dXPqYDsLyEZlzdS1Af7X&ust=1593468199497000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJC6hYzDpeoCFQAAAAAdAAAAABAD');
+    height: 50px;
+    width: 50px;
+    /* Other styles here */
+}
   

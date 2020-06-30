@@ -16,7 +16,7 @@ namespace MoKAPI_Test1.Controllers
 
         public WidgetController(WidgetContext context)
         {
-            _context = context;
+            _context = context; 
         }
 
         // GET: api/Widget

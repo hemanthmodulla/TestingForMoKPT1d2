@@ -169,7 +169,7 @@ export class DashboardService {
       maxCols: 30,
       minRows: 1,
       maxRows: 500,
-      maxItemCols: 15,
+      maxItemCols: 100,
       minItemCols: 1,
       maxItemRows: 100,
       minItemRows: 1,
