@@ -13,47 +13,69 @@ class ImageSnippet {
 })
 export class ImageComponent implements OnInit {
 
-  constructor(public dashboardService: DashboardService) { }
-
   @Input()
   widget;
   @Input()
   resizeEvent: EventEmitter<any>;
   resizeSub: Subscription;
+  public imagePath;
   // tslint:disable-next-line: ban-types
   public idvalue: Number;
+  imgURL: any;
+  imageVal: Blob;
+  public message: string;
+  // tslint:disable-next-line: ban-types
+  public blockText: Boolean = false;
+  constructor(public dashboardService: DashboardService) {
+    if (this.dashboardService.IDModelDictionary != null) {
+      this.imageVal = new Blob([this.dashboardService.IDModelDictionary.get(this.dashboardService.idVal.toString())]);
+ }
 
+   }
 
   ngOnInit() {
-     // tslint:disable-next-line: max-line-length
-     if (this.dashboardService.currentdashboard.widgets.length > 0 && this.dashboardService.currentdashboard.widgets[this.dashboardService.kendocount] !=  null) {
+    // tslint:disable-next-line: max-line-length
+    if (this.dashboardService.currentdashboard.widgets.length > 0 && this.dashboardService.currentdashboard.widgets[this.dashboardService.kendocount] !=  null) {
       this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.kendocount].id);
+      let reader = new FileReader();
       this.dashboardService.kendocount = this.dashboardService.kendocount + 1 ;
+      reader.readAsDataURL(this.imageVal);
+      this.imgURL = reader.result;
+
     } else if (this.dashboardService.currentdashboard.widgets.length === 0 ) {
       this.idvalue = 1;
     } else {
+
     // tslint:disable-next-line: max-line-length
-      this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.currentdashboard.widgets.length - 1].id);
+    this.idvalue =  Number(this.dashboardService.currentdashboard.widgets[this.dashboardService.currentdashboard.widgets.length - 1].id);
+    }
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy() {
+    this.resizeSub.unsubscribe();
+  }
+  preview(files , id: string) {
+    console.log(files.length);
+    if (files.length === 0) {
+      return;
     }
 
-     this.resizeSub = this.resizeEvent.subscribe((widget) => {
-      if (widget === this.widget) {      }
-    });
-  }
+    let mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = 'Only images are supported.';
+      return;
+    }
 
-
-  saveImage(imageInput: any, id: string, $event) {
-    const me = this;
-
-    const imageFile: File = imageInput.files[0];
-
-    const reader = new FileReader();
-    reader.readAsDataURL(imageFile);
-    console.log('save image');
-    reader.onload = function() {
-      console.log(reader.result);
-      me.dashboardService.IDModelDictionary.set(id, reader.result.toString());
-      console.log(me.dashboardService.IDModelDictionary);
+    let reader = new FileReader();
+    this.imagePath = files;
+   
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      this.dashboardService.IDModelDictionary.set(id, reader.result);
+      this.blockText = true;
     };
   }
+
 }

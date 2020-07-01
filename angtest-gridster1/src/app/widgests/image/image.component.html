@@ -1,9 +1,9 @@
-<label  class="image-upload-container btn btn-bwm">
-    <span>Select Image</span>
-    <input #imageInput id="{{this.idvalue}}" 
-           type="file"
-           accept="image/*"
-           (change)="saveImage(imageInput, imageInput.id )">
-  </label>
+<div class="maincontainer" *ngIf="this.dashboardService.IDModelDictionary.get(this.idvalue.toString()) === ''">
+    
+    <label>Please Upload an Image</label>
+    <input #file type="file" accept='image/*' (change)="preview(file.files, file.id)" id="{{this.idvalue}}"/>
+  </div>
 
-  <img  src={{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}>
+  <div *ngIf="this.dashboardService.IDModelDictionary.get(this.idvalue.toString()) != ''">
+    <img class="drag-handler image-dimensions" src="{{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}" >
+  </div>

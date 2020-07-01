@@ -2,8 +2,6 @@
     <button type="button" class="btn btn-primary top-btn-left"
     (click)="onClick_LoadUserDashboard1()"><i class="fa fa-podcast" aria-hidden="true"></i> User Dashboard 1</button>
     <button type="button" class="btn btn-success top-btn-left"
-    (click)="onClick_AddChartWidget()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Chart Widget</button>
-    <button type="button" class="btn btn-success top-btn-left"
     (click)="onClick_AddNominationListWidget()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Nomination List</button>
 
     <button type="button" class="btn btn-success top-btn-left"
@@ -17,14 +15,25 @@
     
     <gridster [options]="options" style="background-color:gray">
         <gridster-item [item]="widget" *ngFor="let widget of dashboard">
-          <div class="widget-container">
-            <button class="widget-showoptions">Button</button>
-            <div class="widget-options">sdvcfsfgsfgvsf</div>
-            <ndc-dynamic class="widget-content" [ndcDynamicComponent]="widget.componentType"
-                 (ndcDynamicInputs)="inputs"
-                 (ndcDynamicOutputs)="outputs">
+          <div class="widgets-container">
+            <div class="gridster-item-options">
+              <a href="#">
+                <mat-icon style="color: blue;" class="drag-handler">open_with</mat-icon>
+              </a> 
+              <a class="widget-header-btn" (mousedown)="onClick_removeItem($event, widget)"
+                        (touchstart)="onClick_removeItem($event, widget)">
+                        <mat-icon>cancel</mat-icon>
+              </a>
+            </div>
+              <div class=" gridster-item-content">
+                
+                <ndc-dynamic [ndcDynamicComponent]="widget.componentType"
+                  (ndcDynamicInputs)="inputs"
+                  (ndcDynamicOutputs)="outputs">
                 </ndc-dynamic>
+              </div>
           </div>
+          
         </gridster-item>
       </gridster>
 </div>

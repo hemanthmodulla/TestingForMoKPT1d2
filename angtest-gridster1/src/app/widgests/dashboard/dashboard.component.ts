@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { GridsterConfig, GridsterItem, DisplayGrid } from 'angular-gridster2';
-import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { KendoComponent } from '../kendo/kendo.component';
 import { User } from 'src/app/models/user.model';
 import { Example1Component } from 'src/app/widgets/example1/example1.component';
@@ -85,22 +84,6 @@ export class DashboardComponent implements OnInit {
    user.id = '123';
    this.dashboard = this.dashboardService.getUserDashBoards(user).widgets;
  }
-
-  public onClick_AddChartWidget(): void {
-    this.dashboardService.idVal = this.dashboardService.idVal + 1;
-    this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), '');
-    this.dashboard.push({
-     id: this.dashboardService.idVal.toString(),
-     name: 'Chart',
-     componentName: 'bar-chart',
-     componentType: BarChartComponent,
-     cols: 2,
-     rows: 2,
-     y: 0,
-     x: 0,
-   });
-
-  }
 
   public onClick_AddNominationListWidget(): void {
     this.dashboardService.idVal = this.dashboardService.idVal + 1;

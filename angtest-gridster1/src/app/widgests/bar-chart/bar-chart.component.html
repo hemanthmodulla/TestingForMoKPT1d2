@@ -1,2 +1,0 @@
-  <input *ngIf="this.dashboardService.IDModelDictionary.get(this.idvalue.toString()) === ''" #file type="file" accept='image/*' (change)="preview(file.files, file.id)" id="{{this.idvalue}}"/>
-  <img class="drag-handler image-dimensions" src="{{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}" >

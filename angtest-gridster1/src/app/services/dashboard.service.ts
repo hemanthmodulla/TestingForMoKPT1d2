@@ -3,7 +3,6 @@ import { User } from '../models/user.model';
 import { Dashboard } from '../models/dashboard.model';
 import { DashboardOptions } from '../models/dashboard-options.model';
 import { KendoComponent } from '../widgests/kendo/kendo.component';
-import { BarChartComponent } from '../widgests/bar-chart/bar-chart.component';
 import { InputFormComponent } from '../widgests/input-form/input-form.component';
 import { Widget } from '../models/widget.model';
 import { GridType, CompactType } from 'angular-gridster2';
@@ -85,10 +84,6 @@ export class DashboardService {
           }
           if (widget.componentName === 'input-form') {
             widget.componentType = InputFormComponent;
-            this.idVal = Number(widget.id);
-          }
-          if (widget.componentName === 'bar-chart') {
-            widget.componentType = BarChartComponent;
             this.idVal = Number(widget.id);
           }
           if (widget.componentName === 'Image') {
