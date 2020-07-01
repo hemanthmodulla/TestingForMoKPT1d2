@@ -1,10 +1,4 @@
-<label  class="image-upload-container btn btn-bwm">
-    <span>Select Image</span>
-    <input #imageInput id="{{this.idvalue}}" 
-           type="file"
-           accept="image/*"
-           (change)="saveImage(imageInput, imageInput.id )">
-  </label>
-
-  <img  src={{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}>
+<div >
+  <input #text class="form-control" (input)="onSearchChange($event.target.value, text.id,$event)" type="text" id="{{this.idvalue}}" value="{{this.dashboardService.IDModelDictionary.get(this.idvalue.toString())}}">
+</div>
 

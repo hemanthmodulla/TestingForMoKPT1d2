@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { GridsterModule } from 'angular-gridster2';
 import { DynamicModule } from 'ng-dynamic-component';
 import { DashboardComponent } from './widgests/dashboard/dashboard.component';
-import { BarChartComponent } from './widgests/bar-chart/bar-chart.component';
 import { KendoComponent } from './widgests/kendo/kendo.component';
 import { InputFormComponent } from './widgests/input-form/input-form.component';
 import { DashboardService } from './services/dashboard.service';
@@ -38,7 +37,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     DashboardComponent,
-    BarChartComponent,
     KendoComponent,
     InputFormComponent,
     Example1Component,
@@ -63,14 +61,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     HttpClientModule,
     // tslint:disable-next-line: deprecation
-    DynamicModule.withComponents([KendoComponent, InputFormComponent, BarChartComponent,ImageComponent,CheckboxComponent]),
+    DynamicModule.withComponents([KendoComponent, InputFormComponent,ImageComponent,CheckboxComponent]),
     BrowserAnimationsModule
   ],
   exports: [
     DashboardComponent,
     KendoComponent,
     InputFormComponent,
-    BarChartComponent,
     ImageComponent,
     CheckboxComponent,
     MatIconModule
@@ -80,7 +77,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     WidgetCommunicationService
   ],
   entryComponents:[
-    BarChartComponent,
     KendoComponent,
     InputFormComponent,
     Example1Component,

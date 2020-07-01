@@ -82,8 +82,8 @@ export class DashboardService {
             widget.componentType = KendoComponent;
             this.idVal = Number(widget.id);
           }
-          if (widget.componentName === 'input-form') {
-            widget.componentType = InputFormComponent;
+          if (widget.componentName === 'Text-Box') {
+            widget.componentType = TextboxComponent;
             this.idVal = Number(widget.id);
           }
           if (widget.componentName === 'Image') {

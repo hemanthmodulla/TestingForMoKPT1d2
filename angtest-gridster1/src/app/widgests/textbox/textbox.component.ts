@@ -49,8 +49,9 @@ export class TextboxComponent implements OnInit {
     this.resizeSub.unsubscribe();
   }
 
-  onSearchChange(searchValue: string): void {
-    this.txtbox.v = searchValue;
+  onSearchChange(searchValue: string, id: string, $event): void {
+    this.dashboardService.textboxval = searchValue;
+    this.dashboardService.IDModelDictionary.set(id, searchValue);
   }
 
   saveImage(imageInput: any, id: string, $event) {

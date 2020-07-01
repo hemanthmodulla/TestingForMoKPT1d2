@@ -137,6 +137,23 @@ public onClick_AddCheckbox(): void {
 
 }
 
+public onClick_AddTextBox(): void {
+  this.dashboardService.idVal = this.dashboardService.idVal + 1;
+  this.dashboardService.IDModelDictionary.set(this.dashboardService.idVal.toString(), this.dashboardService.textboxval);
+  this.dashboard.push({
+   id: this.dashboardService.idVal.toString(),
+   name: 'Text Box',
+   componentName: 'Text-Box',
+   componentType: TextboxComponent,
+   cols: 2,
+   rows: 1,
+   y: 0,
+   x: 0,
+   model: this.dashboardService.textboxval,
+
+ });
+
+}
 
  public onClick_SaveUserDashboardsToLocalStorage(): void {
   const user = new User();
