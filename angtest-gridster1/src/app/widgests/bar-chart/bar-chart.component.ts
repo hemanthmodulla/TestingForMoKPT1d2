@@ -20,6 +20,8 @@ export class BarChartComponent implements OnInit  {
   imgURL: any;
   imageVal: Blob;
   public message: string;
+  // tslint:disable-next-line: ban-types
+  public blockText: Boolean = false;
   constructor(public dashboardService: DashboardService) {
     if (this.dashboardService.IDModelDictionary != null) {
       this.imageVal = new Blob([this.dashboardService.IDModelDictionary.get(this.dashboardService.idVal.toString())]);
@@ -68,6 +70,7 @@ export class BarChartComponent implements OnInit  {
     reader.onload = (_event) => {
       this.imgURL = reader.result;
       this.dashboardService.IDModelDictionary.set(id, reader.result);
+      this.blockText = true;
     };
   }
 
